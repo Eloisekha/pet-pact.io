@@ -142,7 +142,10 @@
         /* Soft shadow instead of border */
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
       }
-
+      .avatar-img {
+        width: 90%;
+        background-color: transparent;
+      }
       .name-row {
         display: flex;
         align-items: center;
@@ -359,7 +362,7 @@
       .support-btn {
         margin-top: auto;
         width: 100%;
-        height: 46px;
+        padding: 20px;
         border-radius: 14px;
         border: 2px solid rgba(31, 31, 31, 0.1);
         background: rgba(var(--cream-rgb), 0.35);
@@ -478,7 +481,7 @@
 
           <div class="hero-card">
             <div class="avatar-circle">
-              <span id="avatarEmoji">🐶</span>
+              <img class="avatar-img" src="normal.png" alt="user avatar" />
             </div>
 
             <div class="name-row" id="nameDisplayRow">
