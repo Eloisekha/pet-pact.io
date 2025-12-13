@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pet Pact - Profile</title>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap"
       rel="stylesheet"
@@ -12,16 +13,32 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
+      :root {
+        --bg: #f4f3f1;
+        --ink: #1f1f1f;
+        --accent: #f3b03b;
+        --cream: #ede3be;
+        --cream-rgb: 237, 227, 190;
+        --danger: #f3543b;
+      }
+
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Nunito", sans-serif;
+        font-family: "DynaPuff", system-ui, sans-serif;
       }
+
       body {
-        background: #e0e5ec;
+        background: var(--cream);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -31,7 +48,7 @@
       .phone-frame {
         width: 320px;
         height: 640px;
-        background: #000;
+        background: var(--ink);
         border-radius: 36px;
         padding: 10px;
         position: relative;
@@ -41,7 +58,7 @@
       .phone-notch {
         width: 130px;
         height: 22px;
-        background: #000;
+        background: var(--ink);
         position: absolute;
         left: 50%;
         top: 0;
@@ -54,224 +71,392 @@
       .app-screen {
         width: 100%;
         height: 100%;
-        background: #b4c5e4;
+        background: var(--bg);
         border-radius: 28px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        position: relative;
       }
 
-      .header-row {
+      .scroll-content {
+        flex: 1;
+        padding: 28px 20px 22px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 14px; /* Reduced gap slightly */
+      }
+      .scroll-content::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* HEADER */
+      .header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 28px 20px 10px; /* match calendar/header style */
+        margin-bottom: 4px;
       }
-
       .back-btn {
         background: none;
         border: none;
+        color: var(--ink);
         font-size: 20px;
-        font-weight: 800;
-        color: #2c3e50;
+        font-weight: 900;
         cursor: pointer;
       }
-
-      .header-title {
+      .page-title {
         flex: 1;
         text-align: center;
-        font-size: 18px; /* align with CALENDAR title */
+        font-size: 16px;
         font-weight: 900;
         letter-spacing: 2px;
-        color: #2c3e50;
+        color: var(--ink);
         text-transform: uppercase;
-        margin-right: 20px; /* align arrow vs title */
+        margin-right: 20px;
       }
 
-      .content {
-        flex: 1;
-        padding: 12px 20px 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-
-      /* HERO CARD */
+      /* HERO CARD (Profile) */
       .hero-card {
-        background: #fdfbf7;
+        background: rgba(var(--cream-rgb), 0.32);
         border-radius: 22px;
-        padding: 18px 16px;
+        padding: 16px 14px; /* Reduced padding */
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+        border: 2px solid rgba(31, 31, 31, 0.08);
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 8px; /* Reduced gap */
       }
 
-      .avatar-row {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-      }
-
+      /* Avatar: No border, soft shadow */
       .avatar-circle {
         width: 80px;
         height: 80px;
         border-radius: 50%;
-        background: #eedc82;
-        border: 4px solid #ffffff;
+        background: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 40px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+        font-size: 38px;
+        /* Soft shadow instead of border */
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
       }
 
       .name-row {
         display: flex;
         align-items: center;
-        gap: 6px;
-      }
-
-      .username {
-        font-size: 16px;
-        font-weight: 900;
-        color: #2c3e50;
-      }
-
-      .edit-name-btn {
-        background: none;
-        border: none;
-        font-size: 12px;
-        color: #4a5568;
-        cursor: pointer;
-      }
-
-      .name-input-row {
-        display: none;
-        gap: 6px;
+        gap: 8px;
         margin-top: 4px;
       }
+      .username {
+        font-size: 18px;
+        font-weight: 900;
+        color: var(--ink);
+      }
 
-      .name-input {
+      .icon-action-btn {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: rgba(var(--cream-rgb), 0.5);
+        border: 2px solid rgba(31, 31, 31, 0.1);
+        color: var(--ink);
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      /* Inputs (Name & Bio) */
+      .edit-group {
+        display: none;
+        width: 100%;
+        gap: 6px;
+        justify-content: center;
+        align-items: center;
+      }
+      .simple-input {
         flex: 1;
-        border-radius: 12px;
-        border: none;
-        padding: 6px 8px;
-        font-size: 12px;
-        font-weight: 700;
-        background: #edf2f7;
-        color: #2c3e50;
+        min-width: 0;
+        padding: 6px 10px;
+        border-radius: 10px;
+        border: 2px solid rgba(31, 31, 31, 0.1);
+        background: #fff;
+        font-weight: 900;
+        color: var(--ink);
+        font-size: 13px;
+        text-align: center;
         outline: none;
       }
-
-      .name-save-btn {
-        border: none;
-        border-radius: 12px;
-        padding: 6px 10px;
-        font-size: 11px;
-        font-weight: 800;
+      .save-btn-mini {
+        padding: 6px 12px;
+        border-radius: 10px;
+        background: var(--accent);
+        border: 2px solid rgba(31, 31, 31, 0.1);
+        font-weight: 900;
+        font-size: 12px;
         cursor: pointer;
-        background: #a8d5ba;
-        color: #2c3e50;
+        color: var(--ink);
+        white-space: nowrap;
       }
 
-      .hero-subtext {
-        font-size: 12px; /* slightly bigger to match calendar captions */
-        font-weight: 700;
-        color: #718096;
+      /* Bio */
+      .bio-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .bio-display-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+      }
+      .bio-text {
+        font-size: 12px;
+        font-weight: 800;
+        color: rgba(31, 31, 31, 0.6);
         text-align: center;
+        line-height: 1.3;
+        max-width: 220px;
       }
 
-      /* STATS STRIP */
+      /* Stats */
       .stats-strip {
-        background: #fdfbf7;
-        border-radius: 18px;
-        padding: 10px 12px;
         display: flex;
         justify-content: space-between;
-        gap: 6px;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+        gap: 8px;
       }
-
       .stat-block {
         flex: 1;
         text-align: center;
+        background: rgba(var(--cream-rgb), 0.3);
+        border-radius: 16px;
+        padding: 10px 4px;
+        border: 2px solid rgba(31, 31, 31, 0.08);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
       }
-
       .stat-label {
-        font-size: 11px; /* match calendar section-label */
-        font-weight: 800;
-        color: #718096;
-        text-transform: uppercase;
-        margin-bottom: 2px;
-      }
-
-      .stat-value {
-        font-size: 16px; /* slightly up for hierarchy */
+        font-size: 9px;
         font-weight: 900;
-        color: #2c3e50;
-      }
-
-      /* PREFERENCES – SIMPLIFIED */
-      .prefs-card {
-        background: #fdfbf7;
-        border-radius: 18px;
-        padding: 14px 16px;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .prefs-title {
-        font-size: 12px;
-        font-weight: 900;
-        color: #2c3e50;
-        margin-bottom: 2px;
+        color: rgba(31, 31, 31, 0.45);
         text-transform: uppercase;
+        margin-bottom: 3px;
         letter-spacing: 0.5px;
       }
-
-      .prefs-main-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .prefs-label {
-        font-size: 11px;
-        font-weight: 800;
-        color: #718096;
-      }
-
-      .prefs-highlight {
+      .stat-value {
         font-size: 14px;
         font-weight: 900;
-        color: #2c3e50;
+        color: var(--ink);
       }
 
-      .prefs-note {
-        font-size: 10px;
-        font-weight: 700;
-        color: #a0aec0;
+      /* Preferences */
+      .prefs-card {
+        background: rgba(var(--cream-rgb), 0.32);
+        border-radius: 22px;
+        padding: 16px 14px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+        border: 2px solid rgba(31, 31, 31, 0.08);
       }
 
-      .chip-row {
+      .section-label-row {
+        font-size: 11px;
+        font-weight: 900;
+        color: rgba(31, 31, 31, 0.6);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
         display: flex;
-        gap: 6px;
-        margin-top: 2px;
-        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
       }
 
-      .chip {
-        padding: 3px 8px;
-        border-radius: 999px;
+      /* STATIC + BADGE (Unclickable) */
+      .icon-badge-static {
+        width: 28px;
+        height: 28px;
+        border-radius: 10px;
+        background: var(--ink); /* Black background */
+        color: var(--accent); /* Yellow icon */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 900;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        cursor: default; /* Not clickable */
+      }
+
+      .setting-row {
+        background: rgba(var(--cream-rgb), 0.3);
+        border-radius: 16px;
+        padding: 12px 12px;
+        border: 2px solid rgba(31, 31, 31, 0.08);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .setting-left {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+      }
+      .setting-title {
+        font-size: 12px;
+        font-weight: 900;
+        color: var(--ink);
+      }
+      .setting-sub {
         font-size: 10px;
-        font-weight: 800;
-        background: #edf2f7;
-        color: #2c3e50;
+        font-weight: 900;
+        color: rgba(31, 31, 31, 0.45);
+        text-transform: uppercase;
+        letter-spacing: 0.35px;
+      }
+
+      .setting-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 0 0 auto;
+      }
+
+      .value-chip {
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 900;
+        color: var(--ink);
+        background: rgba(var(--cream-rgb), 0.45);
+        border: 2px solid rgba(31, 31, 31, 0.08);
+      }
+
+      .edit-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 12px;
+        border: 2px solid rgba(31, 31, 31, 0.1);
+        background: var(--accent);
+        color: var(--ink);
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
+      /* System Support */
+      .support-btn {
+        margin-top: auto;
+        width: 100%;
+        height: 46px;
+        border-radius: 14px;
+        border: 2px solid rgba(31, 31, 31, 0.1);
+        background: rgba(var(--cream-rgb), 0.35);
+        color: rgba(31, 31, 31, 0.75);
+        font-size: 13px;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+        cursor: default; /* unclickable look */
+      }
+
+      /* POPUPS */
+      .popup-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+      }
+      .popup-dim {
+        position: absolute;
+        inset: 0;
+        background: rgba(31, 31, 31, 0.25);
+      }
+      .popup-box {
+        position: relative;
+        width: min(300px, 92vw);
+        background: rgba(var(--cream-rgb), 0.92);
+        backdrop-filter: blur(14px);
+        border-radius: 22px;
+        padding: 16px 16px 14px;
+        border: 2px solid rgba(31, 31, 31, 0.1);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+        text-align: center;
+      }
+      .popup-box h3 {
+        font-size: 14px;
+        font-weight: 900;
+        color: var(--ink);
+        margin-bottom: 6px;
+      }
+      .popup-box p {
+        font-size: 13px;
+        font-weight: 900;
+        color: rgba(31, 31, 31, 0.7);
+        margin-bottom: 12px;
+      }
+      .popup-actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+      .popup-btn {
+        flex: 1;
+        border: none;
+        border-radius: 14px;
+        padding: 10px 12px;
+        font-size: 13px;
+        font-weight: 900;
+        cursor: pointer;
+        border: 2px solid rgba(31, 31, 31, 0.1);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+      }
+      .popup-primary {
+        background: var(--accent);
+        color: var(--ink);
+      }
+      .popup-secondary {
+        background: rgba(var(--cream-rgb), 0.35);
+        color: var(--ink);
+      }
+
+      /* --- POPUP INPUT STYLING --- */
+      .popup-input {
+        width: 100%;
+        margin: 10px 0 12px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 2px solid var(--ink); /* Defined border */
+
+        /* FIX: Make background accent (yellow) so it matches the vibe */
+        background: var(--accent);
+        color: var(--ink);
+
+        font-size: 16px; /* slightly larger for readability */
+        font-weight: 900;
+        outline: none;
+        font-family: "DynaPuff", sans-serif;
+        text-align: center;
+      }
+      .popup-input::placeholder {
+        color: rgba(31, 31, 31, 0.5);
       }
     </style>
   </head>
@@ -280,158 +465,308 @@
     <div class="phone-frame">
       <div class="phone-notch"></div>
       <div class="app-screen">
-        <div class="header-row">
-          <button class="back-btn" onclick="window.location.href='main.html';">
-            ←
-          </button>
-          <div class="header-title">PROFILE</div>
-        </div>
+        <div class="scroll-content">
+          <header class="header">
+            <button
+              class="back-btn"
+              onclick="window.location.href='main.html';"
+            >
+              ←
+            </button>
+            <div class="page-title">PROFILE</div>
+          </header>
 
-        <div class="content">
-          <!-- HERO -->
           <div class="hero-card">
-            <div class="avatar-row">
-              <div class="avatar-circle">
-                <span id="avatarEmoji">🐶</span>
-              </div>
+            <div class="avatar-circle">
+              <span id="avatarEmoji">🐶</span>
+            </div>
 
-              <div class="name-row">
-                <span id="usernameDisplay" class="username">Focus Buddy</span>
-                <button id="editNameBtn" class="edit-name-btn">
+            <div class="name-row" id="nameDisplayRow">
+              <span id="usernameDisplay" class="username">Focus Buddy</span>
+              <button id="editNameBtn" class="icon-action-btn">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+            </div>
+
+            <div class="edit-group" id="nameEditGroup">
+              <input
+                id="nameInput"
+                class="simple-input"
+                type="text"
+                maxlength="12"
+              />
+              <button id="nameSaveBtn" class="save-btn-mini">OK</button>
+            </div>
+
+            <div class="bio-wrapper" id="bioDisplayRow">
+              <div class="bio-display-row">
+                <div class="bio-text" id="bioText">
+                  Ready to conquer tasks with Pet Pact! 🐾
+                </div>
+                <button id="editBioBtn" class="icon-action-btn">
                   <i class="fa-solid fa-pen"></i>
                 </button>
               </div>
-
-              <div id="nameInputRow" class="name-input-row">
-                <input
-                  id="nameInput"
-                  class="name-input"
-                  type="text"
-                  maxlength="18"
-                  placeholder="Enter nickname"
-                />
-                <button id="nameSaveBtn" class="name-save-btn">Save</button>
-              </div>
             </div>
 
-            <div class="hero-subtext">Your focus history with Pet Pact.</div>
+            <div class="edit-group" id="bioEditGroup">
+              <input
+                id="bioInput"
+                class="simple-input"
+                type="text"
+                maxlength="20"
+              />
+              <button id="bioSaveBtn" class="save-btn-mini">OK</button>
+            </div>
           </div>
 
-          <!-- STATS -->
           <div class="stats-strip">
             <div class="stat-block">
               <div class="stat-label">Total focus</div>
               <div id="totalFocusText" class="stat-value">0h 00m</div>
             </div>
             <div class="stat-block">
-              <div class="stat-label">Total Sessions</div>
+              <div class="stat-label">Sessions</div>
               <div id="sessionCountText" class="stat-value">0</div>
             </div>
             <div class="stat-block">
-              <div class="stat-label">Best streak</div>
-              <div id="bestStreakText" class="stat-value">0</div>
+              <div class="stat-label">Your streak</div>
+              <div id="currentStreakText" class="stat-value">0</div>
             </div>
           </div>
 
-          <!-- FOCUS PREFERENCES – SIMPLE -->
           <div class="prefs-card">
-            <div class="prefs-title">Focus setup</div>
-
-            <div class="prefs-main-row">
-              <span class="prefs-label">Default session</span>
-              <span id="favSessionText" class="prefs-highlight">25 min</span>
+            <div class="section-label-row">
+              <span>Focus setup</span>
+              <div class="icon-badge-static">
+                <i class="fa-solid fa-plus"></i>
+              </div>
             </div>
 
-            <div id="favBreakText" class="prefs-note">Auto break: 5 min</div>
-
-            <div class="chip-row">
-              <div class="chip">Study Mode</div>
-              <div class="chip">Auto Break</div>
-              <div class="chip">Pop-up Alerts</div>
+            <div class="setting-row">
+              <div class="setting-left">
+                <div class="setting-title">Session length</div>
+                <div class="setting-sub">Customizable</div>
+              </div>
+              <div class="setting-right">
+                <span id="favSessionText" class="value-chip">25 min</span>
+                <button id="editSessionBtn" class="edit-btn">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </div>
             </div>
+
+            <div class="setting-row">
+              <div class="setting-left">
+                <div class="setting-title">Break length</div>
+                <div class="setting-sub">Customizable</div>
+              </div>
+              <div class="setting-right">
+                <span id="favBreakText" class="value-chip">5 min</span>
+                <button id="editBreakBtn" class="edit-btn">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="support-btn">
+            <i class="fa-solid fa-life-ring"></i>
+            SYSTEM SUPPORT
           </div>
         </div>
       </div>
     </div>
 
     <script>
-      // ---- KEYS SHARED ACROSS APP ----
+      // ---- KEYS ----
       const NAME_KEY = "petpact_profile_name";
+      const BIO_KEY = "petpact_profile_bio";
       const TOTAL_MINUTES_KEY = "petpact_total_minutes";
       const SESSION_COUNT_KEY = "petpact_session_count";
+      const CURRENT_STREAK_KEY = "petpact_current_streak";
       const BEST_STREAK_KEY = "petpact_best_streak";
-      const LAST_FOCUS_MIN_KEY = "petpact_taskMinutes"; // calendar/main already use this
 
+      // Preferences
+      const PREF_SESSION_MIN_KEY = "petpact_pref_session_min";
+      const PREF_BREAK_MIN_KEY = "petpact_pref_break_min";
+      const LAST_FOCUS_MIN_KEY = "petpact_taskMinutes";
+      const LAST_BREAK_MIN_KEY = "petpact_breakMinutes";
+
+      // ---- ELEMENTS: NAME ----
       const usernameDisplay = document.getElementById("usernameDisplay");
       const editNameBtn = document.getElementById("editNameBtn");
-      const nameInputRow = document.getElementById("nameInputRow");
+      const nameEditGroup = document.getElementById("nameEditGroup");
       const nameInput = document.getElementById("nameInput");
       const nameSaveBtn = document.getElementById("nameSaveBtn");
+      const nameDisplayRow = document.getElementById("nameDisplayRow");
 
+      // ---- ELEMENTS: BIO ----
+      const bioText = document.getElementById("bioText");
+      const editBioBtn = document.getElementById("editBioBtn");
+      const bioEditGroup = document.getElementById("bioEditGroup");
+      const bioInput = document.getElementById("bioInput");
+      const bioSaveBtn = document.getElementById("bioSaveBtn");
+      const bioDisplayRow = document.getElementById("bioDisplayRow");
+
+      // ---- ELEMENTS: STATS ----
       const totalFocusText = document.getElementById("totalFocusText");
       const sessionCountText = document.getElementById("sessionCountText");
-      const bestStreakText = document.getElementById("bestStreakText");
+      const currentStreakText = document.getElementById("currentStreakText");
+
+      // ---- ELEMENTS: SETUP ----
       const favSessionText = document.getElementById("favSessionText");
       const favBreakText = document.getElementById("favBreakText");
+      const editSessionBtn = document.getElementById("editSessionBtn");
+      const editBreakBtn = document.getElementById("editBreakBtn");
 
-      // ---- NAME ----
+      // ---------- POPUP HELPER ----------
+      function popupMessage(title, msg) {
+        const pop = document.createElement("div");
+        pop.className = "popup-overlay";
+        pop.innerHTML = `
+          <div class="popup-dim"></div>
+          <div class="popup-box">
+            <h3>${title}</h3>
+            <p>${msg}</p>
+            <div class="popup-actions">
+              <button class="popup-btn popup-primary">OK</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(pop);
+        const close = () => pop.remove();
+        pop.querySelector(".popup-dim").onclick = close;
+        pop.querySelector(".popup-primary").onclick = close;
+      }
+
+      function popupInputNumber(title, placeholder, initial, yesFn) {
+        const pop = document.createElement("div");
+        pop.className = "popup-overlay";
+        pop.innerHTML = `
+          <div class="popup-dim"></div>
+          <div class="popup-box">
+            <h3>${title}</h3>
+            <input class="popup-input" type="number" min="1" max="120"
+              placeholder="${placeholder}" value="${initial}" />
+            <div class="popup-actions">
+              <button class="popup-btn popup-secondary">Cancel</button>
+              <button class="popup-btn popup-primary">Save</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(pop);
+        const input = pop.querySelector(".popup-input");
+        input.focus();
+
+        const close = () => pop.remove();
+        pop.querySelector(".popup-dim").onclick = close;
+        pop.querySelector(".popup-secondary").onclick = close;
+        pop.querySelector(".popup-primary").onclick = () => {
+          const v = parseInt(input.value, 10);
+          if (isNaN(v) || v < 1) {
+            popupMessage("Invalid", "Please enter a number (1 or more).");
+            return;
+          }
+          if (yesFn) yesFn(v);
+          close();
+        };
+      }
+
+      // ---------- 1. NAME LOGIC ----------
       const savedName = localStorage.getItem(NAME_KEY);
-      if (savedName && savedName.trim() !== "") {
+      if (savedName && savedName.trim())
         usernameDisplay.textContent = savedName;
-      }
 
-      editNameBtn.addEventListener("click", () => {
+      editNameBtn.onclick = () => {
         nameInput.value = usernameDisplay.textContent;
-        nameInputRow.style.display = "flex";
+        nameDisplayRow.style.display = "none";
+        nameEditGroup.style.display = "flex";
         nameInput.focus();
-      });
+      };
 
-      nameSaveBtn.addEventListener("click", () => {
-        const newName = nameInput.value.trim();
-        if (!newName) {
-          alert("Name cannot be empty.");
-          return;
+      nameSaveBtn.onclick = () => {
+        const val = nameInput.value.trim();
+        if (val) {
+          localStorage.setItem(NAME_KEY, val);
+          usernameDisplay.textContent = val;
         }
-        usernameDisplay.textContent = newName;
-        localStorage.setItem(NAME_KEY, newName);
-        nameInputRow.style.display = "none";
-      });
+        nameEditGroup.style.display = "none";
+        nameDisplayRow.style.display = "flex";
+      };
 
-      // ---- STATS (from main.html) ----
-      const rawMinutes = parseInt(localStorage.getItem(TOTAL_MINUTES_KEY), 10);
-      const rawSessions = parseInt(localStorage.getItem(SESSION_COUNT_KEY), 10);
-      const rawBestStreak = parseInt(localStorage.getItem(BEST_STREAK_KEY), 10);
+      // ---------- 2. BIO LOGIC (Same UI as Name) ----------
+      const savedBio = localStorage.getItem(BIO_KEY);
+      if (savedBio && savedBio.trim()) bioText.textContent = savedBio;
 
-      const minutes = !isNaN(rawMinutes) && rawMinutes > 0 ? rawMinutes : 0;
-      const sessions = !isNaN(rawSessions) && rawSessions > 0 ? rawSessions : 0;
-      const bestStreak =
-        !isNaN(rawBestStreak) && rawBestStreak > 0 ? rawBestStreak : 0;
+      editBioBtn.onclick = () => {
+        bioInput.value = bioText.textContent;
+        bioDisplayRow.style.display = "none";
+        bioEditGroup.style.display = "flex";
+        bioInput.focus();
+      };
 
-      const hours = Math.floor(minutes / 60);
-      const mins = minutes % 60;
-      totalFocusText.textContent =
-        String(hours) + "h " + String(mins).padStart(2, "0") + "m";
-      sessionCountText.textContent = sessions.toString();
-      bestStreakText.textContent = bestStreak.toString();
+      bioSaveBtn.onclick = () => {
+        const val = bioInput.value.trim();
+        if (val) {
+          localStorage.setItem(BIO_KEY, val);
+          bioText.textContent = val;
+        }
+        bioEditGroup.style.display = "none";
+        bioDisplayRow.style.display = "flex";
+      };
 
-      // ---- FOCUS PREFERENCES ----
-      const lastFocusMinStr = localStorage.getItem(LAST_FOCUS_MIN_KEY);
-      let defaultMinutes = 25;
-      if (lastFocusMinStr) {
-        const v = parseInt(lastFocusMinStr, 10);
-        if (!isNaN(v) && v > 0) defaultMinutes = v;
+      // ---------- 3. STATS LOGIC ----------
+      const rawMins = parseInt(localStorage.getItem(TOTAL_MINUTES_KEY) || 0);
+      const rawSessions = parseInt(
+        localStorage.getItem(SESSION_COUNT_KEY) || 0
+      );
+      const h = Math.floor(rawMins / 60);
+      const m = rawMins % 60;
+      totalFocusText.textContent = `${h}h ${String(m).padStart(2, "0")}m`;
+      sessionCountText.textContent = rawSessions;
+
+      const rawCurrent = parseInt(localStorage.getItem(CURRENT_STREAK_KEY), 10);
+      const rawBest = parseInt(localStorage.getItem(BEST_STREAK_KEY), 10);
+      const displayStreak = !isNaN(rawCurrent)
+        ? rawCurrent
+        : !isNaN(rawBest)
+        ? rawBest
+        : 0;
+      currentStreakText.textContent = String(displayStreak);
+
+      // ---------- 4. PREFERENCES LOGIC ----------
+      function readPrefInt(key, fallback) {
+        const v = parseInt(localStorage.getItem(key), 10);
+        return !isNaN(v) && v > 0 ? v : fallback;
       }
-      favSessionText.textContent = defaultMinutes + " min";
+      const sessionFallback = readPrefInt(LAST_FOCUS_MIN_KEY, 25);
+      const breakFallback = readPrefInt(LAST_BREAK_MIN_KEY, 5);
 
-      let breakText;
-      if (defaultMinutes < 5) {
-        breakText = "Auto break: 1 min";
-      } else if (defaultMinutes <= 25) {
-        breakText = "Auto break: 5 min";
-      } else {
-        breakText = "Auto break: 20 min";
+      let prefSession = readPrefInt(PREF_SESSION_MIN_KEY, sessionFallback);
+      let prefBreak = readPrefInt(PREF_BREAK_MIN_KEY, breakFallback);
+
+      function renderPrefs() {
+        favSessionText.textContent = `${prefSession} min`;
+        favBreakText.textContent = `${prefBreak} min`;
       }
-      favBreakText.textContent = breakText;
+      renderPrefs();
+
+      editSessionBtn.onclick = () => {
+        popupInputNumber("Session length", "Minutes", prefSession, (v) => {
+          prefSession = v;
+          localStorage.setItem(PREF_SESSION_MIN_KEY, String(v));
+          renderPrefs();
+        });
+      };
+
+      editBreakBtn.onclick = () => {
+        popupInputNumber("Break length", "Minutes", prefBreak, (v) => {
+          prefBreak = v;
+          localStorage.setItem(PREF_BREAK_MIN_KEY, String(v));
+          renderPrefs();
+        });
+      };
     </script>
   </body>
 </html>

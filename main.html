@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pet Pact - Timer</title>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap"
       rel="stylesheet"
@@ -12,87 +13,154 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
+      /* --- THEME VARIABLES --- */
+      :root {
+        --bg: #f4f3f1;
+        --ink: #1f1f1f;
+        --accent: #f3b03b;
+        --cream: #ede3be;
+        --cream-rgb: 237, 227, 190;
+        --danger: #f3543b;
+      }
+      @font-face {
+        font-family: "BP Child Fatty";
+        src: url("./fonts/bpchildfatty.regular.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Nunito", sans-serif;
+        font-family: "DynaPuff", system-ui, sans-serif;
+        font-weight: 400;
       }
+
       body {
-        background: #e0e5ec;
+        background: var(--cream);
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
       }
 
-      /* SMALLER PHONE FRAME */
+      /* --- PHONE FRAME --- */
       .phone-frame {
         width: 320px;
         height: 640px;
-        background: #000;
+        background-color: var(--ink);
         border-radius: 36px;
         padding: 10px;
         position: relative;
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
       }
       .phone-notch {
         width: 130px;
         height: 22px;
-        background: #000;
+        background: var(--ink);
         position: absolute;
         left: 50%;
         top: 0;
         transform: translateX(-50%);
         border-bottom-left-radius: 18px;
         border-bottom-right-radius: 18px;
+        z-index: 10;
       }
 
-      /* MAIN SCREEN */
       .app-screen {
         width: 100%;
         height: 100%;
-        background: #b4c5e4;
+        background: var(--bg);
         border-radius: 28px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        position: relative; /* for menu drawer */
+        position: relative;
       }
 
+      /* --- HEADER --- */
       .header-row {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 35px 20px 10px;
+        gap: 10px;
       }
+
       .menu-btn {
         background: none;
         border: none;
         font-size: 22px;
-        font-weight: 800;
-        color: #2c3e50;
+        font-weight: 900;
+        color: var(--ink);
         cursor: pointer;
+        line-height: 1;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
 
       .streak-badge {
-        background: #fdfbf7;
-        padding: 5px 12px;
-        border-radius: 18px;
+        background: rgba(var(--cream-rgb), 0.3);
+        padding: 6px 10px;
+        border-radius: 999px;
         font-size: 13px;
-        font-weight: 800;
-        color: #2c3e50;
+        font-weight: 900;
+        color: var(--ink);
         display: flex;
         align-items: center;
         gap: 6px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        border: 2px solid rgba(31, 31, 31, 0.08);
       }
       .streak-badge i {
-        color: #f4a460;
+        color: var(--accent);
       }
 
+      .user-chip {
+        background: rgba(var(--cream-rgb), 0.3);
+        border: 2px solid rgba(31, 31, 31, 0.08);
+        border-radius: 999px;
+        padding: 6px 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+      .user-avatar {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--accent);
+        display: grid;
+        place-items: center;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .user-name {
+        font-size: 12px;
+        font-weight: 900;
+        color: var(--ink);
+        max-width: 96px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      /* --- TIMER CONTENT --- */
       .timer-content {
         flex: 1;
         display: flex;
@@ -103,16 +171,17 @@
       }
 
       .focus-tag {
-        background: #f4a460;
-        color: #fff;
-        font-size: 14px;
-        font-weight: 800;
+        background: var(--accent);
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 900;
         padding: 7px 16px;
-        border-radius: 25px;
+        border-radius: 999px;
         display: flex;
         align-items: center;
         gap: 8px;
         margin-bottom: 18px;
+        border: 2px solid rgba(31, 31, 31, 0.1);
       }
 
       .pet-wrapper {
@@ -130,15 +199,15 @@
       }
       .progress-ring__bg {
         fill: none;
-        stroke: rgba(255, 255, 255, 0.4);
+        stroke: rgba(31, 31, 31, 0.08);
         stroke-width: 12;
       }
       .progress-ring__value {
         fill: none;
-        stroke: #f4a460;
+        stroke: var(--accent);
         stroke-width: 12;
         stroke-linecap: round;
-        filter: drop-shadow(0 0 4px rgba(244, 164, 96, 0.5));
+        filter: drop-shadow(0 0 4px rgba(243, 176, 59, 0.35));
         stroke-dasharray: 0 999;
         transition: stroke-dashoffset 0.35s, stroke 0.3s;
       }
@@ -151,26 +220,51 @@
         width: 170px;
         height: 170px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.55);
-        border: 7px solid rgba(255, 255, 255, 0.9);
+        background: rgba(var(--cream-rgb), 0.25);
+        border: 7px solid rgba(31, 31, 31, 0.06);
         display: flex;
         justify-content: center;
         align-items: center;
         transition: 0.3s;
       }
-      .pet-circle.active {
-        box-shadow: 0 0 26px rgba(244, 164, 96, 0.6);
-        background: rgba(255, 255, 255, 0.95);
+
+      @keyframes pulseGlow {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+          box-shadow: 0 0 0 rgba(243, 176, 59, 0);
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.03);
+          box-shadow: 0 0 28px rgba(243, 176, 59, 0.35);
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+          box-shadow: 0 0 0 rgba(243, 176, 59, 0);
+        }
       }
-      .pet-placeholder {
-        font-size: 72px;
+
+      .pet-circle.active {
+        background: rgba(var(--cream-rgb), 0.42);
+        animation: pulseGlow 1.2s ease-in-out infinite;
+      }
+
+      .pet-img {
+        width: 130px;
+        height: 130px;
+        object-fit: contain;
+        display: block;
+        user-select: none;
+        -webkit-user-drag: none;
       }
 
       .timer-text {
         font-size: 52px;
-        font-weight: 800;
-        color: #2c3e50;
+        font-weight: 900;
+        color: var(--ink);
         margin-bottom: 18px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        user-select: none;
       }
 
       .action-btn {
@@ -185,19 +279,14 @@
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
       }
       .btn-start {
-        background: #a8d5ba;
-        color: #2c3e50;
-      }
-      .btn-resume {
-        background: #eedc82;
-        color: #2c3e50;
+        background: var(--accent);
+        color: var(--ink);
       }
       .btn-giveup {
-        background: #e57373;
+        background: var(--danger);
         color: #fff;
       }
 
-      /* RESUME + END UI buttons */
       #resumeEndRow {
         display: none;
         flex-direction: row;
@@ -218,35 +307,37 @@
         cursor: pointer;
       }
       .resume-big {
-        background: #eedc82;
-        color: #2c3e50;
+        background: rgba(var(--cream-rgb), 0.7);
+        color: var(--ink);
+        border: 2px solid rgba(31, 31, 31, 0.08);
       }
       .end-big {
-        background: #e57373;
+        background: var(--danger);
         color: white;
       }
 
-      /* POPUP THEME */
+      /* --- POPUP STYLES --- */
       .popup-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(44, 62, 80, 0.55);
+        background: rgba(31, 31, 31, 0.35);
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 999;
       }
       .popup-box {
-        background: #fdfbf7;
+        background: var(--bg);
         border-radius: 22px;
         width: 280px;
         padding: 22px;
         text-align: center;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.22);
         animation: scalePop 0.25s;
+        border: 2px solid rgba(31, 31, 31, 0.08);
       }
       @keyframes scalePop {
         from {
@@ -260,14 +351,14 @@
       .popup-box h3 {
         font-size: 19px;
         font-weight: 900;
-        color: #2c3e50;
+        color: var(--ink);
         margin-bottom: 8px;
       }
       .popup-box p {
         font-size: 13px;
-        color: #4a5568;
+        color: rgba(31, 31, 31, 0.75);
         margin-bottom: 18px;
-        font-weight: 700;
+        font-weight: 800;
       }
 
       .popup-actions {
@@ -284,15 +375,15 @@
         cursor: pointer;
       }
       .popup-yes {
-        background: #f4a460;
-        color: #fff;
+        background: var(--accent);
+        color: var(--ink);
       }
       .popup-no {
-        background: #e0e5ec;
-        color: #2c3e50;
+        background: rgba(var(--cream-rgb), 0.35);
+        color: var(--ink);
       }
 
-      /* MENU DRAWER INSIDE FRAME */
+      /* --- MENU DRAWER --- */
       .menu-drawer {
         position: absolute;
         top: 0;
@@ -305,7 +396,7 @@
       .menu-drawer-overlay {
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.15);
+        background: rgba(31, 31, 31, 0.18);
         opacity: 0;
         transition: opacity 0.2s ease;
       }
@@ -315,7 +406,7 @@
         left: 0;
         height: 100%;
         width: 220px;
-        background: #fdfbf7;
+        background: var(--bg);
         box-shadow: 6px 0 18px rgba(0, 0, 0, 0.25);
         border-radius: 28px 0 0 28px;
         transform: translateX(-110%);
@@ -323,6 +414,7 @@
         display: flex;
         flex-direction: column;
         padding: 28px 18px 18px;
+        border-right: 2px solid rgba(31, 31, 31, 0.08);
       }
       .menu-drawer.open {
         pointer-events: auto;
@@ -335,16 +427,17 @@
       }
 
       .menu-title {
-        font-size: 18px;
+        font-family: "BP Child Fatty", "Nunito", sans-serif;
+        font-size: 26px;
         font-weight: 900;
-        color: #2c3e50;
+        color: var(--ink);
         letter-spacing: 2px;
         margin-bottom: 6px;
       }
       .menu-subtitle {
         font-size: 11px;
-        font-weight: 700;
-        color: #718096;
+        font-weight: 800;
+        color: rgba(31, 31, 31, 0.6);
         margin-bottom: 18px;
       }
       .menu-close {
@@ -353,7 +446,7 @@
         border: none;
         font-size: 18px;
         font-weight: 900;
-        color: #2c3e50;
+        color: var(--ink);
         cursor: pointer;
         margin-bottom: 8px;
       }
@@ -365,27 +458,200 @@
       .menu-item {
         width: 100%;
         text-align: left;
-        border: none;
+        border: 2px solid rgba(31, 31, 31, 0.08);
         border-radius: 14px;
         padding: 10px 12px;
         font-size: 13px;
-        font-weight: 800;
+        font-weight: 900;
         cursor: pointer;
-        background: #edf2f7;
-        color: #2c3e50;
+        background: rgba(var(--cream-rgb), 0.25);
+        color: var(--ink);
       }
       .menu-item.primary {
-        background: #a8d5ba;
+        background: var(--accent);
+        color: var(--ink);
       }
       .menu-item:hover {
-        background: #f4a460;
+        background: var(--accent);
+      }
+      .menu-item.logout {
+        background: rgba(243, 84, 59, 0.16);
+        border-color: rgba(243, 84, 59, 0.35);
+      }
+      .menu-item.logout:hover {
+        background: var(--danger);
         color: #fff;
       }
       .menu-footer {
         margin-top: auto;
         font-size: 10px;
-        color: #a0aec0;
-        font-weight: 700;
+        color: rgba(31, 31, 31, 0.45);
+        font-weight: 800;
+      }
+
+      /* --- PICKER --- */
+      .picker-overlay {
+        position: absolute;
+        inset: 0;
+        display: none;
+        z-index: 200;
+      }
+      .picker-overlay.open {
+        display: block;
+      }
+
+      .picker-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(31, 31, 31, 0.25);
+      }
+
+      .picker-sheet {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 14px;
+
+        background: rgba(var(--cream-rgb), 0.92);
+        backdrop-filter: blur(14px);
+
+        border-radius: 22px;
+        padding-bottom: 12px;
+
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+        border: 2px solid rgba(31, 31, 31, 0.08);
+      }
+
+      .picker-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 14px;
+        border-bottom: 1px solid rgba(31, 31, 31, 0.08);
+      }
+
+      .picker-header button {
+        background: none;
+        border: none;
+        font-size: 15px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      #pickerCancel {
+        color: rgba(31, 31, 31, 0.55);
+      }
+      #pickerSave {
+        color: var(--accent);
+      }
+
+      .picker-title {
+        color: var(--ink);
+        font-size: 15px;
+        font-weight: 900;
+      }
+
+      .picker-body {
+        position: relative;
+        height: 170px;
+        padding: 10px 6px 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .wheel-col {
+        position: relative;
+        height: 150px;
+        overflow: hidden;
+        border-radius: 14px;
+        background: transparent;
+      }
+
+      .wheel-scroll {
+        height: 150px;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding: 57px 0;
+      }
+
+      .wheel-item {
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        scroll-snap-align: center;
+        font-size: 20px;
+        font-weight: 900;
+
+        color: rgba(31, 31, 31, 0.35);
+        user-select: none;
+      }
+
+      .wheel-item.selected {
+        color: var(--ink);
+      }
+
+      .wheel-highlight {
+        position: absolute;
+        left: 6px;
+        right: 6px;
+        top: 57px;
+        height: 36px;
+        border-radius: 12px;
+
+        background: rgba(31, 31, 31, 0.06);
+        border: 1px solid rgba(31, 31, 31, 0.08);
+        pointer-events: none;
+      }
+
+      .wheel-label {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        color: rgba(31, 31, 31, 0.35);
+        pointer-events: none;
+      }
+      .wheel-scroll {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .wheel-scroll::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        display: none;
+      }
+      .wheel-col::before,
+      .wheel-col::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 44px;
+        pointer-events: none;
+        z-index: 2;
+      }
+      .wheel-col::before {
+        top: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(var(--cream-rgb), 0.95),
+          rgba(var(--cream-rgb), 0)
+        );
+      }
+      .wheel-col::after {
+        bottom: 0;
+        background: linear-gradient(
+          to top,
+          rgba(var(--cream-rgb), 0.95),
+          rgba(var(--cream-rgb), 0)
+        );
       }
     </style>
   </head>
@@ -393,36 +659,45 @@
   <body>
     <div class="phone-frame">
       <div class="phone-notch"></div>
-      <div class="app-screen">
+
+      <div class="app-screen" id="appScreen">
         <div class="header-row">
           <button class="menu-btn" id="menuBtn">☰</button>
-          <div class="streak-badge" id="streakBadge">
-            <i class="fa-solid fa-fire"></i>
-            <span id="streakText">0 Focus Streak</span>
+
+          <div class="header-right">
+            <div class="streak-badge" id="streakBadge">
+              <i class="fa-solid fa-fire"></i>
+              <span id="streakText">0</span>
+            </div>
+
+            <div class="user-chip" id="userChip" role="button" tabindex="0">
+              <div class="user-avatar" id="userAvatar">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="user-name" id="userName">username</div>
+            </div>
           </div>
         </div>
 
-        <!-- SLIDE-IN MENU DRAWER -->
         <div class="menu-drawer" id="menuDrawer">
           <div class="menu-drawer-overlay" id="menuOverlay"></div>
           <div class="menu-panel">
             <button class="menu-close" id="menuClose">✕</button>
-            <div class="menu-title">PET PACT</div>
+            <div class="menu-title">pet pact</div>
             <div class="menu-subtitle">Your focus, your pact.</div>
 
             <div class="menu-items">
-              <!-- Back to timer = just close drawer -->
               <button class="menu-item primary" id="menuHome">
                 Back to Home
               </button>
-
-              <!-- Calendar page -->
-              <button class="menu-item" id="menuCalendar">Calendar</button>
-
-              <!-- These can go to placeholder pages for now -->
               <button class="menu-item" id="menuProfile">Profile</button>
+              <button class="menu-item" id="menuCalendar">Calendar</button>
               <button class="menu-item" id="menuFriends">Friends</button>
               <button class="menu-item" id="menuShop">Pet Shop</button>
+              <button class="menu-item" id="menuSettings">Settings</button>
+              <button class="menu-item logout" id="menuLogout">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+              </button>
             </div>
 
             <div class="menu-footer">v0.1 • Focus & Break Companion</div>
@@ -456,32 +731,71 @@
             </svg>
 
             <div class="pet-circle" id="petCircle">
-              <div class="pet-placeholder" id="petFace">🐶</div>
+              <img id="petImg" class="pet-img" src="normal.png" alt="Pet" />
             </div>
           </div>
 
-          <div class="timer-text" id="timeLeft">25:00</div>
+          <div class="timer-text" id="timeLeft" title="Tap to change time">
+            25:00
+          </div>
 
-          <!-- main button -->
           <button id="timerBtn" class="action-btn btn-start">START</button>
 
-          <!-- buttons shown after "give up YES" -->
           <div id="resumeEndRow">
             <button class="resume-big" id="resumeBtn">RESUME</button>
             <button class="end-big" id="endBtn">END</button>
+          </div>
+        </div>
+
+        <div class="picker-overlay" id="timePicker">
+          <div class="picker-backdrop" id="pickerBackdrop"></div>
+
+          <div
+            class="picker-sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Set timer"
+          >
+            <div class="picker-header">
+              <button id="pickerCancel">Cancel</button>
+              <div class="picker-title">Set Timer</div>
+              <button id="pickerSave">Save</button>
+            </div>
+
+            <div class="picker-body">
+              <div class="wheel-col">
+                <div class="wheel-highlight"></div>
+                <div class="wheel-scroll" id="wheelHours"></div>
+                <div class="wheel-label">hrs</div>
+              </div>
+
+              <div class="wheel-col">
+                <div class="wheel-highlight"></div>
+                <div class="wheel-scroll" id="wheelMins"></div>
+                <div class="wheel-label">min</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <script>
-      /* ---------- READ TASK & MINUTES FROM LOCALSTORAGE ---------- */
-      const storedTaskName = localStorage.getItem("petpact_taskName");
-      const storedTaskMinutesStr = localStorage.getItem("petpact_taskMinutes");
+      /* =========================
+     ✅ PetPact main.html script (updated)
+     - Friend/calendar/solo label always correct
+     - Friend session clears on END / abort / finish break
+     ========================= */
+
+      /* ---------- STORAGE KEYS ---------- */
+      const TASK_NAME_KEY = "petpact_taskName";
+      const TASK_MIN_KEY = "petpact_taskMinutes";
+      const BREAK_MIN_KEY = "petpact_breakMinutes";
+      const ACTIVE_CTX_KEY = "petpact_active_context"; // {type:"friend", label:"Study with ...", friendNames:[...], createdAt:number}
 
       /* ---------- CORE VALUES ---------- */
       const pet = document.getElementById("petCircle");
-      const petFace = document.getElementById("petFace");
+      const petImg = document.getElementById("petImg");
       const timerEl = document.getElementById("timeLeft");
       const btn = document.getElementById("timerBtn");
       const resumeRow = document.getElementById("resumeEndRow");
@@ -491,47 +805,110 @@
       const streakTextEl = document.getElementById("streakText");
       const progressCircle = document.querySelector(".progress-ring__value");
 
-      // ---- GLOBAL STATS SHARED WITH PROFILE ----
+      // header user chip
+      const userChip = document.getElementById("userChip");
+      const userNameEl = document.getElementById("userName");
+
       const TOTAL_MINUTES_KEY = "petpact_total_minutes";
       const SESSION_COUNT_KEY = "petpact_session_count";
       const BEST_STREAK_KEY = "petpact_best_streak";
 
-      // Load existing stats or default to 0
       let totalMinutes =
         parseInt(localStorage.getItem(TOTAL_MINUTES_KEY), 10) || 0;
       let sessionCount =
         parseInt(localStorage.getItem(SESSION_COUNT_KEY), 10) || 0;
       let bestStreak = parseInt(localStorage.getItem(BEST_STREAK_KEY), 10) || 0;
 
-      // focusTotal = selected minutes * 60, or default 25 min
-      let focusTotal;
-      if (storedTaskMinutesStr) {
-        const mins = parseInt(storedTaskMinutesStr, 10);
-        if (!isNaN(mins) && mins > 0) {
-          focusTotal = mins * 60;
-        } else {
-          focusTotal = 25 * 60;
-        }
-      } else {
-        focusTotal = 25 * 60;
+      /* ---------- ACTIVE CONTEXT HELPERS ---------- */
+      function setActiveContext(ctx) {
+        localStorage.setItem(ACTIVE_CTX_KEY, JSON.stringify(ctx));
       }
+      function getActiveContext() {
+        try {
+          return JSON.parse(localStorage.getItem(ACTIVE_CTX_KEY) || "null");
+        } catch {
+          return null;
+        }
+      }
+      function clearFriendContext() {
+        const ctx = getActiveContext();
+        if (ctx && ctx.type === "friend")
+          localStorage.removeItem(ACTIVE_CTX_KEY);
+      }
+      function renderModeTag() {
+        const ctx = getActiveContext();
+        const taskName = (localStorage.getItem(TASK_NAME_KEY) || "").trim();
+
+        // Priority: friend -> task -> default
+        if (ctx && ctx.type === "friend" && ctx.label) {
+          modeTag.innerHTML = `<i class="fa-solid fa-users"></i> ${ctx.label}`;
+          return;
+        }
+        if (taskName) {
+          modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> ${taskName}`;
+          return;
+        }
+        modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> Study Mode`;
+      }
+
+      /* ---------- TIMER BASED ON TASK MINUTES (or default 25) ---------- */
+      function readFocusTotalSeconds() {
+        const storedTaskMinutesStr = localStorage.getItem(TASK_MIN_KEY);
+        if (storedTaskMinutesStr) {
+          const mins = parseInt(storedTaskMinutesStr, 10);
+          if (!isNaN(mins) && mins > 0) return mins * 60;
+        }
+        return 25 * 60;
+      }
+
+      let focusTotal = readFocusTotalSeconds();
 
       let total = focusTotal;
       let remain = total;
       let timerRunning = false;
       let interval = null;
 
-      // Modes: "focus", "focus-paused", "break-ready", "break"
       let mode = "focus";
       let breakWarningShown = false;
-      let streakCount = 3;
 
-      (function initStreak() {
-        const num = parseInt(streakTextEl.textContent, 10);
-        if (!isNaN(num)) streakCount = num;
-        streakTextEl.textContent = streakCount + " Focus Streak";
+      let streakCount = 0;
+      let lockIdleFace = false;
+
+      function setPetFace(name) {
+        const safe = ["happy", "angry", "sad", "normal", "surprised"].includes(
+          name
+        )
+          ? name
+          : "normal";
+        petImg.src = `${safe}.png`;
+      }
+
+      function refreshUsername() {
+        const storedUsername = localStorage.getItem("petpact_username");
+        const username =
+          storedUsername && storedUsername.trim()
+            ? storedUsername.trim()
+            : "username";
+        userNameEl.textContent = username;
+      }
+
+      function refreshIdlePet() {
+        if (lockIdleFace) return;
+        if (sessionCount === 0 || streakCount === 0) setPetFace("normal");
+        else setPetFace("happy");
+      }
+
+      (function initHeaderUser() {
+        refreshUsername();
       })();
 
+      (function initStreak() {
+        streakCount = 0;
+        streakTextEl.textContent = String(streakCount);
+        refreshIdlePet();
+      })();
+
+      /* ---------- PROGRESS RING ---------- */
       const radius = 100;
       const circumference = 2 * Math.PI * radius;
       progressCircle.style.strokeDasharray = `${circumference}`;
@@ -548,58 +925,54 @@
         timerEl.textContent =
           String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
 
-        const progressPercent = ((total - remain) / total) * 100;
+        const progressPercent =
+          total > 0 ? ((total - remain) / total) * 100 : 0;
         setRing(progressPercent);
       }
 
-      // initial tag text based on selected task
-      const storedSessionName = localStorage.getItem("petpact_sessionName");
-
-      // Priority:
-      // 1) friend session name
-      // 2) task name from calendar
-      // 3) default Study Mode
-      if (storedSessionName) {
-        modeTag.innerHTML = `<i class="fa-solid fa-users"></i> ${storedSessionName}`;
-      } else if (storedTaskName) {
-        modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> ${storedTaskName}`;
-      } else {
-        modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> Study Mode`;
-      }
-
-      function ask(title, msg, yesFn) {
+      /* ---------- POPUP ---------- */
+      function ask(title, msg, yesFn, noFn) {
         const pop = document.createElement("div");
         pop.className = "popup-overlay";
         pop.innerHTML = `
-          <div class="popup-box">
-            <h3>${title}</h3>
-            <p>${msg}</p>
-            <div class="popup-actions">
-              <button class="popup-btn popup-yes">YES</button>
-              <button class="popup-btn popup-no">NO</button>
-            </div>
-          </div>
-        `;
+      <div class="popup-box">
+        <h3>${title}</h3>
+        <p>${msg}</p>
+        <div class="popup-actions">
+          <button class="popup-btn popup-yes">YES</button>
+          <button class="popup-btn popup-no">NO</button>
+        </div>
+      </div>
+    `;
         document.body.appendChild(pop);
 
-        const noBtn = pop.querySelector(".popup-no");
-        const yesBtn = pop.querySelector(".popup-yes");
-
-        noBtn.onclick = () => pop.remove();
-        yesBtn.onclick = () => {
+        pop.querySelector(".popup-no").onclick = () => {
+          noFn && noFn();
+          pop.remove();
+        };
+        pop.querySelector(".popup-yes").onclick = () => {
           yesFn && yesFn();
           pop.remove();
         };
+        return pop;
       }
 
+      /* ---------- RESET / STATE ---------- */
       function resetToFocusIdle() {
         mode = "focus";
         timerRunning = false;
         clearInterval(interval);
+
+        // re-read focus time (in case user came from calendar/task)
+        focusTotal = readFocusTotalSeconds();
         total = focusTotal;
         remain = total;
+
         pet.classList.remove("active");
-        progressCircle.style.stroke = "#f4a460";
+        progressCircle.style.stroke = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue("--accent");
+
         setRing(0);
         updateTimeDisplay();
 
@@ -608,13 +981,8 @@
         btn.className = "action-btn btn-start";
         resumeRow.style.display = "none";
 
-        if (storedSessionName) {
-          modeTag.innerHTML = `<i class="fa-solid fa-users"></i> ${storedSessionName}`;
-        } else if (storedTaskName) {
-          modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> ${storedTaskName}`;
-        } else {
-          modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> Study Mode`;
-        }
+        refreshIdlePet();
+        renderModeTag();
       }
 
       function getBreakLengthSeconds() {
@@ -627,18 +995,17 @@
         remain--;
 
         if (remain <= 0) {
-          if (mode === "focus") {
-            onFocusComplete();
-          } else if (mode === "break") {
-            onBreakComplete();
-          }
+          if (mode === "focus") onFocusComplete();
+          else if (mode === "break") onBreakComplete();
           return;
         }
 
         if (mode === "break") {
           if (!breakWarningShown && remain <= 30) {
             breakWarningShown = true;
-            progressCircle.style.stroke = "#e57373"; // red ring
+            progressCircle.style.stroke = getComputedStyle(
+              document.documentElement
+            ).getPropertyValue("--danger");
             ask(
               "Break Ending Soon!",
               "Your break is about to end in 30 seconds. Get ready to focus again!",
@@ -653,24 +1020,29 @@
       function startFocus() {
         mode = "focus";
         timerRunning = true;
+        lockIdleFace = false;
+
         pet.classList.add("active");
-        petFace.textContent = "🐶"; // normal happy when starting
-        progressCircle.style.stroke = "#f4a460";
+        setPetFace("happy");
+
+        progressCircle.style.stroke = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue("--accent");
+
         btn.style.display = "block";
         resumeRow.style.display = "none";
         btn.textContent = "GIVE UP";
         btn.className = "action-btn btn-giveup";
 
-        if (storedTaskName) {
-          modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> ${storedTaskName}`;
-        } else {
-          modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> Study Mode`;
-        }
-
+        // always re-read in case task minutes changed right before start
+        focusTotal = readFocusTotalSeconds();
         total = focusTotal;
         remain = total;
+
         setRing(0);
         updateTimeDisplay();
+
+        renderModeTag();
 
         clearInterval(interval);
         interval = setInterval(tick, 1000);
@@ -679,23 +1051,33 @@
       function giveUp() {
         clearInterval(interval);
         timerRunning = false;
+
         pet.classList.remove("active");
         mode = "focus-paused";
+
         btn.style.display = "none";
         resumeRow.style.display = "flex";
-        petFace.textContent = "😢"; // sad when user gives up
+
+        setPetFace("sad");
+        lockIdleFace = true;
       }
 
       function resumeFocus() {
         mode = "focus";
         timerRunning = true;
+        lockIdleFace = false;
+
         pet.classList.add("active");
-        petFace.textContent = "🐶"; // back to happy while focusing
+        setPetFace("happy");
+
         btn.style.display = "block";
         resumeRow.style.display = "none";
         btn.textContent = "GIVE UP";
         btn.className = "action-btn btn-giveup";
-        progressCircle.style.stroke = "#f4a460";
+
+        progressCircle.style.stroke = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue("--accent");
 
         clearInterval(interval);
         interval = setInterval(tick, 1000);
@@ -704,42 +1086,44 @@
       function abortSession() {
         clearInterval(interval);
         timerRunning = false;
+
         pet.classList.remove("active");
+        setPetFace("angry");
+        lockIdleFace = true;
+
+        // ✅ when user ends session, drop friend session context so it goes back to solo/task
+        clearFriendContext();
+
         resetToFocusIdle();
       }
 
       function onFocusComplete() {
         clearInterval(interval);
         timerRunning = false;
+
         remain = 0;
         updateTimeDisplay();
         setRing(100);
+
         pet.classList.remove("active");
-        petFace.textContent = "🥳"; // finished focus successfully
-        progressCircle.style.stroke = "#f4a460";
+        setPetFace("happy");
+        lockIdleFace = false;
 
-        // ---- STREAK + STATS UPDATE ----
-        // 1) visual streak on timer header
+        progressCircle.style.stroke = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue("--accent");
+
         streakCount += 1;
-        streakTextEl.textContent = streakCount + " Focus Streak";
+        streakTextEl.textContent = String(streakCount);
 
-        // 2) count this focus block as a finished session
         sessionCount += 1;
-
-        // 3) add duration in minutes (focusTotal is in seconds)
         totalMinutes += Math.round(focusTotal / 60);
+        if (streakCount > bestStreak) bestStreak = streakCount;
 
-        // 4) update best streak record
-        if (streakCount > bestStreak) {
-          bestStreak = streakCount;
-        }
-
-        // 5) save to localStorage so PROFILE can read it
         localStorage.setItem(TOTAL_MINUTES_KEY, String(totalMinutes));
         localStorage.setItem(SESSION_COUNT_KEY, String(sessionCount));
         localStorage.setItem(BEST_STREAK_KEY, String(bestStreak));
 
-        // ---- EXISTING UI LOGIC ----
         mode = "break-ready";
         btn.style.display = "block";
         resumeRow.style.display = "none";
@@ -756,34 +1140,49 @@
         const breakLen = getBreakLengthSeconds();
         total = breakLen;
         remain = breakLen;
-        progressCircle.style.stroke = "#f4a460";
+
+        progressCircle.style.stroke = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue("--accent");
+
         setRing(0);
         updateTimeDisplay();
 
         pet.classList.add("active");
-        petFace.textContent = "🐶"; // relaxed happy during break
+        setPetFace("normal");
+        lockIdleFace = false;
 
         btn.style.display = "block";
         btn.textContent = "END BREAK";
         btn.className = "action-btn btn-giveup";
-        resumeRow.style.display = "none";
 
+        resumeRow.style.display = "none";
         modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> Break Time`;
 
         clearInterval(interval);
         interval = setInterval(tick, 1000);
       }
 
-      function finishBreakToFocus() {
+      function finishBreakToFocus(happyOrAngry, reasonText) {
         clearInterval(interval);
         timerRunning = false;
+
         pet.classList.remove("active");
-        petFace.textContent = "🥳"; // happy after finishing break
-        progressCircle.style.stroke = "#f4a460";
+        setPetFace(happyOrAngry ? "happy" : "angry");
+        lockIdleFace = !happyOrAngry;
+
+        progressCircle.style.stroke = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue("--accent");
+
+        // ✅ when break ends and we return to focus start screen, drop friend context
+        clearFriendContext();
 
         mode = "focus";
+        focusTotal = readFocusTotalSeconds();
         total = focusTotal;
         remain = total;
+
         setRing(0);
         updateTimeDisplay();
 
@@ -792,10 +1191,11 @@
         btn.className = "action-btn btn-start";
         resumeRow.style.display = "none";
 
-        if (storedTaskName) {
-          modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> Great job! Next: ${storedTaskName}`;
+        // If the user failed to come back, show reason; otherwise show correct label
+        if (!happyOrAngry && reasonText) {
+          modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> ${reasonText}`;
         } else {
-          modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> Great job! Ready for next focus`;
+          renderModeTag();
         }
       }
 
@@ -804,15 +1204,25 @@
         updateTimeDisplay();
         setRing(100);
 
-        ask(
+        const pop = ask(
           "Break Finished!",
-          "Break is over. Ready to start another focus session?",
+          "Break is over. Tap YES to start focus now.",
           function () {
-            finishBreakToFocus();
+            finishBreakToFocus(true);
           }
         );
+
+        const timeoutMs = 8000;
+        const t = setTimeout(() => {
+          if (!document.body.contains(pop)) return;
+          pop.remove();
+          finishBreakToFocus(false, "You didn't come back in time");
+        }, timeoutMs);
+
+        pop.addEventListener("click", () => clearTimeout(t), { once: true });
       }
 
+      /* ---------- BUTTON LOGIC ---------- */
       btn.onclick = () => {
         const text = btn.textContent;
 
@@ -830,22 +1240,199 @@
           ask(
             "End Break?",
             "Finish your break and go back to focus mode?",
-            finishBreakToFocus
+            () => finishBreakToFocus(true)
           );
         }
       };
 
-      resumeBtn.onclick = () => {
+      resumeBtn.onclick = () =>
         ask("Resume?", "Continue where you left off?", resumeFocus);
-      };
-
-      endBtn.onclick = () => {
+      endBtn.onclick = () =>
         ask("End Session?", "This will reset your session.", abortSession);
-      };
 
-      // Initial draw based on focusTotal (from localStorage or default)
-      updateTimeDisplay();
-      setRing(0);
+      /* ---------- USER CHIP NAV ---------- */
+      function goProfile() {
+        window.location.href = "profile.html";
+      }
+      userChip.addEventListener("click", goProfile);
+      userChip.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          goProfile();
+        }
+      });
+
+      /* =========================
+     ✅ iOS WHEEL PICKER LOGIC (unchanged from your behavior)
+     ========================= */
+      const picker = document.getElementById("timePicker");
+      const pickerBackdrop = document.getElementById("pickerBackdrop");
+      const pickerCancel = document.getElementById("pickerCancel");
+      const pickerSave = document.getElementById("pickerSave");
+      const wheelHours = document.getElementById("wheelHours");
+      const wheelMins = document.getElementById("wheelMins");
+
+      function buildWheel(el, values, formatFn) {
+        el.innerHTML = "";
+        values.forEach((v) => {
+          const item = document.createElement("div");
+          item.className = "wheel-item";
+          item.dataset.value = String(v);
+          item.textContent = formatFn ? formatFn(v) : String(v);
+          el.appendChild(item);
+        });
+      }
+
+      function snapAndSelect(el) {
+        const items = Array.from(el.querySelectorAll(".wheel-item"));
+        const centerY = el.scrollTop + el.clientHeight / 2;
+
+        let best = null;
+        let bestDist = Infinity;
+
+        for (const it of items) {
+          const itCenter = it.offsetTop + it.offsetHeight / 2;
+          const d = Math.abs(itCenter - centerY);
+          if (d < bestDist) {
+            bestDist = d;
+            best = it;
+          }
+        }
+        if (!best) return;
+
+        const targetTop =
+          best.offsetTop - (el.clientHeight / 2 - best.offsetHeight / 2);
+        el.scrollTo({ top: targetTop, behavior: "smooth" });
+
+        items.forEach((x) => x.classList.remove("selected"));
+        best.classList.add("selected");
+      }
+
+      function setWheelValue(el, value) {
+        const it = el.querySelector(`.wheel-item[data-value="${value}"]`);
+        if (!it) return;
+        const targetTop =
+          it.offsetTop - (el.clientHeight / 2 - it.offsetHeight / 2);
+        el.scrollTop = targetTop;
+        snapAndSelect(el);
+      }
+
+      function getWheelValue(el) {
+        const items = Array.from(el.querySelectorAll(".wheel-item"));
+        const centerY = el.scrollTop + el.clientHeight / 2;
+
+        let best = items[0];
+        let bestDist = Infinity;
+
+        for (const it of items) {
+          const itCenter = it.offsetTop + it.offsetHeight / 2;
+          const d = Math.abs(itCenter - centerY);
+          if (d < bestDist) {
+            bestDist = d;
+            best = it;
+          }
+        }
+        return parseInt(best?.dataset?.value || "0", 10);
+      }
+
+      let hScrollT = null;
+      let mScrollT = null;
+
+      function attachWheel(el, which) {
+        el.addEventListener("scroll", () => {
+          if (which === "h") {
+            clearTimeout(hScrollT);
+            hScrollT = setTimeout(() => snapAndSelect(el), 80);
+          } else {
+            clearTimeout(mScrollT);
+            mScrollT = setTimeout(() => snapAndSelect(el), 80);
+          }
+        });
+      }
+
+      buildWheel(wheelHours, [0, 1, 2, 3], (v) => String(v));
+      buildWheel(
+        wheelMins,
+        Array.from({ length: 60 }, (_, i) => i),
+        (v) => String(v).padStart(2, "0")
+      );
+
+      attachWheel(wheelHours, "h");
+      attachWheel(wheelMins, "m");
+
+      function openPicker() {
+        const focusMins = Math.max(1, Math.round(readFocusTotalSeconds() / 60));
+        const h = Math.floor(focusMins / 60);
+        const m = focusMins % 60;
+
+        picker.classList.add("open");
+        setWheelValue(wheelHours, Math.min(3, Math.max(0, h)));
+        setWheelValue(wheelMins, m);
+      }
+
+      function closePicker() {
+        picker.classList.remove("open");
+      }
+
+      function applyNewFocusMinutes(mins) {
+        const clamped = Math.max(1, Math.min(180, mins));
+        localStorage.setItem(TASK_MIN_KEY, String(clamped));
+
+        const newFocusTotal = clamped * 60;
+
+        if (mode === "focus" || mode === "focus-paused") {
+          const elapsed = total - remain;
+          focusTotal = newFocusTotal;
+          total = focusTotal;
+          remain = Math.max(0, total - elapsed);
+
+          setRing(0);
+          updateTimeDisplay();
+
+          if (remain <= 0 && mode === "focus") onFocusComplete();
+          return;
+        }
+
+        if (mode === "break-ready" || mode === "focus") {
+          focusTotal = newFocusTotal;
+          total = focusTotal;
+          remain = total;
+          setRing(0);
+          updateTimeDisplay();
+          return;
+        }
+
+        focusTotal = newFocusTotal;
+      }
+
+      function canChangeTimerNow() {
+        const focusRunning = mode === "focus" && timerRunning === true;
+        const breakRunning = mode === "break" && timerRunning === true;
+        return !(focusRunning || breakRunning);
+      }
+
+      timerEl.addEventListener("click", (e) => {
+        if (!canChangeTimerNow()) {
+          e.preventDefault();
+          return;
+        }
+        openPicker();
+      });
+
+      pickerBackdrop.addEventListener("click", closePicker);
+      pickerCancel.addEventListener("click", closePicker);
+
+      pickerSave.addEventListener("click", () => {
+        const h = getWheelValue(wheelHours);
+        const m = getWheelValue(wheelMins);
+
+        let mins = h * 60 + m;
+        if (mins < 1) mins = 1;
+        if (mins > 180) mins = 180;
+
+        applyNewFocusMinutes(mins);
+        closePicker();
+      });
 
       /* ---------- MENU DRAWER LOGIC ---------- */
       const menuBtn = document.getElementById("menuBtn");
@@ -857,6 +1444,7 @@
       const menuProfile = document.getElementById("menuProfile");
       const menuFriends = document.getElementById("menuFriends");
       const menuShop = document.getElementById("menuShop");
+      const menuLogout = document.getElementById("menuLogout");
 
       function openMenu() {
         menuDrawer.classList.add("open");
@@ -869,26 +1457,51 @@
       menuClose.addEventListener("click", closeMenu);
       menuOverlay.addEventListener("click", closeMenu);
 
-      // Back to timer = just close drawer
-      menuHome.addEventListener("click", () => {
+      menuHome.addEventListener("click", () => closeMenu());
+      menuCalendar.addEventListener(
+        "click",
+        () => (window.location.href = "calendar.html")
+      );
+      menuProfile.addEventListener(
+        "click",
+        () => (window.location.href = "profile.html")
+      );
+      menuFriends.addEventListener(
+        "click",
+        () => (window.location.href = "friends.html")
+      );
+      menuShop.addEventListener(
+        "click",
+        () => (window.location.href = "petshop.html")
+      );
+
+      menuLogout.addEventListener("click", () => {
         closeMenu();
+        localStorage.removeItem("petpact_username");
+        localStorage.removeItem(ACTIVE_CTX_KEY);
+        localStorage.removeItem(TASK_NAME_KEY);
+        localStorage.removeItem(TASK_MIN_KEY);
+        window.location.href = "login.html";
       });
 
-      // Calendar navigation
-      menuCalendar.addEventListener("click", () => {
-        window.location.href = "calendar.html";
+      /* ---------- KEEP UI FRESH ON RETURN ---------- */
+      window.addEventListener("focus", () => {
+        refreshUsername();
+        renderModeTag();
+        // also refresh focusTotal display baseline if user came from calendar
+        if (!timerRunning && (mode === "focus" || mode === "focus-paused")) {
+          focusTotal = readFocusTotalSeconds();
+          total = focusTotal;
+          remain = total;
+          setRing(0);
+          updateTimeDisplay();
+        }
       });
 
-      // Placeholder navs – you can later create these pages
-      menuProfile.addEventListener("click", () => {
-        window.location.href = "profile.html";
-      });
-      menuFriends.addEventListener("click", () => {
-        window.location.href = "friends.html";
-      });
-      menuShop.addEventListener("click", () => {
-        window.location.href = "petshop.html";
-      });
+      /* ---------- INIT ---------- */
+      renderModeTag();
+      updateTimeDisplay();
+      setRing(0);
     </script>
   </body>
 </html>

@@ -4,31 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pet Pact Calendar</title>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      :root {
+        --bg: #f4f3f1;
+        --ink: #1f1f1f;
+        --accent: #f3b03b;
+        --cream: #ede3be;
+        --cream-rgb: 237, 227, 190;
+        --danger: #f3543b;
+      }
+
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Nunito", sans-serif;
+        font-family: "DynaPuff", system-ui, sans-serif;
       }
       body {
-        background: #e0e5ec;
+        background: var(--cream);
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
       }
 
-      /* SMALL PHONE FRAME (same as timer) */
       .phone-frame {
         width: 320px;
         height: 640px;
-        background: #000;
+        background: var(--ink);
         border-radius: 36px;
         padding: 10px;
         box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
@@ -37,7 +55,7 @@
       .phone-notch {
         width: 130px;
         height: 22px;
-        background: #000;
+        background: var(--ink);
         position: absolute;
         left: 50%;
         top: 0;
@@ -47,15 +65,15 @@
         z-index: 10;
       }
 
-      /* SCREEN */
       .app-screen {
         width: 100%;
         height: 100%;
         border-radius: 28px;
-        background: #b4c5e4;
+        background: var(--bg);
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        position: relative;
       }
 
       .scroll-content {
@@ -67,7 +85,6 @@
         display: none;
       }
 
-      /* HEADER */
       .header {
         display: flex;
         align-items: center;
@@ -76,36 +93,38 @@
       .back-btn {
         background: none;
         border: none;
-        color: #2c3e50;
+        color: var(--ink);
         font-size: 20px;
+        font-weight: 900;
         cursor: pointer;
       }
       .page-title {
         flex: 1;
         text-align: center;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 900;
         letter-spacing: 2px;
-        color: #2c3e50;
+        color: var(--ink);
         text-transform: uppercase;
-        margin-right: 20px; /* balance arrow */
+        margin-right: 20px;
       }
 
-      /* CALENDAR CARD */
       .calendar-card {
-        background: #fdfbf7;
+        background: rgba(var(--cream-rgb), 0.32);
         border-radius: 22px;
         padding: 18px 16px 16px;
         margin-bottom: 18px;
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+        border: 2px solid rgba(31, 31, 31, 0.08);
       }
 
       .month-name {
         text-align: center;
         font-size: 15px;
-        font-weight: 800;
-        color: #2c3e50;
+        font-weight: 900;
+        color: var(--ink);
         margin-bottom: 12px;
+        letter-spacing: 0.6px;
       }
 
       .calendar-grid {
@@ -117,43 +136,45 @@
       .day-box {
         aspect-ratio: 1/1;
         border-radius: 10px;
-        background: #edf2f7;
+        background: rgba(var(--cream-rgb), 0.35);
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #758295;
-        font-weight: 700;
+        color: rgba(31, 31, 31, 0.65);
+        font-weight: 900;
         font-size: 11px;
         cursor: pointer;
         transition: 0.18s;
+        border: 2px solid rgba(31, 31, 31, 0.06);
       }
       .day-box:hover {
-        background: #e2e8f0;
+        background: rgba(var(--cream-rgb), 0.55);
       }
       .day-box.selected {
-        background: #ffffff;
-        border: 2px solid #f4a460;
-        color: #f4a460;
+        background: rgba(var(--cream-rgb), 0.2);
+        border: 2px solid rgba(243, 176, 59, 0.9);
+        color: var(--ink);
+        box-shadow: 0 0 0 3px rgba(243, 176, 59, 0.18) inset;
       }
       .day-box.stamped {
-        background: #eedc82;
-        border: 2px solid #2c3e50;
-        color: #2c3e50;
+        background: var(--accent);
+        border: 2px solid rgba(31, 31, 31, 0.12);
+        color: var(--ink);
         font-size: 16px;
       }
 
       .selected-date-display {
         text-align: center;
         font-size: 14px;
-        font-weight: 800;
-        color: #2c3e50;
+        font-weight: 900;
+        color: var(--ink);
         margin-bottom: 18px;
       }
 
       .section-label {
         font-size: 11px;
-        font-weight: 800;
-        color: #4a5568;
+        font-weight: 900;
+        color: rgba(31, 31, 31, 0.6);
         margin-bottom: 6px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -170,96 +191,67 @@
         padding: 12px 14px;
         border-radius: 14px;
         border: none;
-        background: #ffffff;
-        color: #2c3e50;
-        font-weight: 700;
+        background: rgba(var(--cream-rgb), 0.3);
+        color: var(--ink);
+        font-weight: 900;
         font-size: 13px;
         outline: none;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        border: 2px solid rgba(31, 31, 31, 0.08);
+      }
+      .task-input::placeholder {
+        color: rgba(31, 31, 31, 0.45);
+        font-weight: 800;
       }
 
-      /* TIME + ADD ROW */
+      /* --- ONE ROW: Study | Break | Add --- */
       .time-row {
         display: flex;
         gap: 10px;
         align-items: center;
       }
+      /* keep your existing .time-row styles, but upgrade it to:
+   label (like Plan Session) above each input, while STILL in one row with + */
+      .time-row {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end; /* label sits above input; bottoms align */
+      }
 
-      .duration-box {
+      .time-field {
         flex: 1;
-        position: relative;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .time-field .section-label {
+        margin: 0; /* so it looks like your Plan Session label spacing */
+      }
+
+      .add-btn {
+        align-self: flex-end; /* keep + aligned with inputs */
       }
 
       .duration-input {
-        width: 100%;
-        padding: 12px 38px 12px 14px;
+        flex: 1;
+        padding: 12px 14px;
         border-radius: 14px;
         border: none;
-        background: #ffffff;
-        color: #2c3e50;
+        background: rgba(var(--cream-rgb), 0.3);
+        color: var(--ink);
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 900;
         outline: none;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      }
-
-      .dropdown-btn {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 20px;
-        height: 20px;
-        background: none;
-        border: none;
-        padding: 0;
+        border: 2px solid rgba(31, 31, 31, 0.08);
         cursor: pointer;
+        min-width: 0;
       }
-      .dropdown-btn::before {
-        content: "";
-        display: block;
-        width: 100%;
-        height: 100%;
-        -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="%232C3E50" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>')
-          center/contain no-repeat;
-        background-color: #2c3e50;
-        opacity: 0.9;
-      }
-
-      .dropdown-list {
-        position: absolute;
-        top: 104%;
-        left: 0;
-        width: 100%;
-        background: #ffffff;
-        border-radius: 14px;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
-        display: none;
-        overflow: hidden;
-        z-index: 5;
-        animation: fadeIn 0.2s;
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(-4px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .dropdown-item {
-        padding: 11px 14px;
-        font-size: 13px;
+      .duration-input::placeholder {
+        color: rgba(31, 31, 31, 0.45);
         font-weight: 800;
-        color: #2c3e50;
-        cursor: pointer;
-      }
-      .dropdown-item:hover {
-        background: #f4a460;
-        color: #ffffff;
       }
 
       .add-btn {
@@ -267,15 +259,16 @@
         height: 46px;
         border-radius: 14px;
         border: none;
-        background: #f4a460;
-        color: #ffffff;
+        background: var(--accent);
+        color: var(--ink);
         font-size: 24px;
         font-weight: 900;
         cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+        border: 2px solid rgba(31, 31, 31, 0.1);
+        flex: 0 0 auto;
       }
 
-      /* TASK LIST */
       .task-list {
         display: flex;
         flex-direction: column;
@@ -283,25 +276,293 @@
         margin-bottom: 12px;
       }
       .task-card {
-        background: #ffffff;
+        background: rgba(var(--cream-rgb), 0.3);
         padding: 11px 13px;
         border-radius: 14px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        font-weight: 700;
-        color: #2c3e50;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+        font-weight: 900;
+        color: var(--ink);
         font-size: 13px;
-        cursor: pointer; /* make it clear it's clickable */
+        cursor: pointer;
+        border: 2px solid rgba(31, 31, 31, 0.08);
+      }
+
+      .time-tags {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-end;
       }
       .time-tag {
-        background: #a8d5ba;
+        background: rgba(var(--cream-rgb), 0.45);
         padding: 4px 10px;
-        border-radius: 10px;
-        font-weight: 800;
-        color: #2c3e50;
-        font-size: 12px;
+        border-radius: 999px;
+        font-weight: 900;
+        color: var(--ink);
+        font-size: 11px;
+        border: 2px solid rgba(31, 31, 31, 0.08);
+      }
+      .time-tag.accent {
+        background: var(--accent);
+      }
+
+      /* =========================
+         iOS-STYLE PICKER
+         ========================= */
+      .picker-overlay {
+        position: absolute;
+        inset: 0;
+        display: none;
+        z-index: 200;
+      }
+      .picker-overlay.open {
+        display: block;
+      }
+
+      .picker-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(31, 31, 31, 0.25);
+      }
+
+      .picker-sheet {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 14px;
+        background: rgba(var(--cream-rgb), 0.92);
+        backdrop-filter: blur(14px);
+        border-radius: 22px;
+        padding-bottom: 12px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+        border: 2px solid rgba(31, 31, 31, 0.08);
+      }
+
+      .picker-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 14px;
+        border-bottom: 1px solid rgba(31, 31, 31, 0.08);
+      }
+
+      .picker-header button {
+        background: none;
+        border: none;
+        font-size: 15px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .picker-cancel {
+        color: rgba(31, 31, 31, 0.55);
+      }
+      .picker-save {
+        color: var(--accent);
+      }
+
+      .picker-title {
+        color: var(--ink);
+        font-size: 15px;
+        font-weight: 900;
+      }
+
+      .picker-body {
+        position: relative;
+        height: 170px;
+        padding: 10px 6px 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .wheel-col {
+        position: relative;
+        height: 150px;
+        overflow: hidden;
+        border-radius: 14px;
+        background: transparent;
+      }
+
+      .wheel-scroll {
+        height: 150px;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding: 57px 0;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .wheel-scroll::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        display: none;
+      }
+
+      .wheel-item {
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        scroll-snap-align: center;
+        font-size: 20px;
+        font-weight: 900;
+        color: rgba(31, 31, 31, 0.35);
+        user-select: none;
+      }
+      .wheel-item.selected {
+        color: var(--ink);
+      }
+
+      .wheel-highlight {
+        position: absolute;
+        left: 6px;
+        right: 6px;
+        top: 57px;
+        height: 36px;
+        border-radius: 12px;
+        background: rgba(31, 31, 31, 0.06);
+        border: 1px solid rgba(31, 31, 31, 0.08);
+        pointer-events: none;
+      }
+
+      .wheel-label {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        color: rgba(31, 31, 31, 0.35);
+        pointer-events: none;
+      }
+
+      .wheel-col::before,
+      .wheel-col::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 44px;
+        pointer-events: none;
+        z-index: 2;
+      }
+      .wheel-col::before {
+        top: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(var(--cream-rgb), 0.95),
+          rgba(var(--cream-rgb), 0)
+        );
+      }
+      .wheel-col::after {
+        bottom: 0;
+        background: linear-gradient(
+          to top,
+          rgba(var(--cream-rgb), 0.95),
+          rgba(var(--cream-rgb), 0)
+        );
+      }
+
+      /* =========================
+         POPUP (main.html-style, no alert())
+         ========================= */
+      .popup-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+      }
+      .popup-overlay .popup-dim {
+        position: absolute;
+        inset: 0;
+        background: rgba(31, 31, 31, 0.25);
+      }
+      .popup-box {
+        position: relative;
+        width: min(300px, 92vw);
+        background: rgba(var(--cream-rgb), 0.92);
+        backdrop-filter: blur(14px);
+        border-radius: 22px;
+        padding: 16px 16px 14px;
+        border: 2px solid rgba(31, 31, 31, 0.1);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+        text-align: center;
+      }
+      .popup-box h3 {
+        font-size: 14px;
+        font-weight: 900;
+        color: var(--ink);
+        margin-bottom: 6px;
+        letter-spacing: 0.4px;
+      }
+      .popup-box p {
+        font-size: 13px;
+        font-weight: 900;
+        color: rgba(31, 31, 31, 0.7);
+        margin-bottom: 12px;
+        line-height: 1.25;
+      }
+      .popup-actions {
+        display: flex;
+        justify-content: center;
+      }
+      .popup-btn {
+        border: none;
+        border-radius: 14px;
+        padding: 10px 16px;
+        font-size: 13px;
+        font-weight: 900;
+        cursor: pointer;
+        background: var(--accent);
+        color: var(--ink);
+        border: 2px solid rgba(31, 31, 31, 0.1);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+        min-width: 92px;
+      }
+      /* Share icon button — icon only, no box */
+      .share-btn {
+        background: none; /* no box */
+        border: none; /* no border box */
+        padding: 6px; /* tap area */
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: var(--accent); /* yellow icon */
+        font-size: 18px; /* icon size */
+
+        transition: color 0.2s ease, transform 0.15s ease;
+      }
+
+      /* make icon readable on light bg */
+      .share-btn i {
+        -webkit-text-stroke: 1.2px var(--ink); /* black outline */
+      }
+
+      /* hover / active */
+      .share-btn:hover {
+        color: var(--ink); /* turn black on hover */
+        transform: scale(1.08);
+      }
+
+      .share-btn:active {
+        transform: scale(0.95);
+      }
+
+      /* mobile tap highlight off */
+      .share-btn:focus {
+        outline: none;
       }
     </style>
   </head>
@@ -315,14 +576,14 @@
             <button
               class="back-btn"
               onclick="
-    localStorage.removeItem('petpact_taskName');
-    localStorage.removeItem('petpact_taskMinutes');
-    window.location.href = 'main.html';
-  "
+                localStorage.removeItem('petpact_taskName');
+                localStorage.removeItem('petpact_taskMinutes');
+                localStorage.removeItem('petpact_breakMinutes');
+                window.location.href = 'main.html';
+              "
             >
               ←
             </button>
-
             <div class="page-title">CALENDAR</div>
           </header>
 
@@ -335,7 +596,8 @@
             Tap a day to select!
           </p>
 
-          <label class="section-label">Plan Session</label>
+          <!-- REPLACE ONLY THIS PART (inside Plan Session) -->
+          <label class="section-label">Plan Your Session</label>
           <div class="input-group-col">
             <input
               id="taskInput"
@@ -343,30 +605,26 @@
               placeholder="What are you studying?"
             />
 
+            <!-- labels above each input, but still one row with + -->
             <div class="time-row">
-              <div class="duration-box">
+              <div class="time-field">
+                <div class="section-label">Study time</div>
                 <input
-                  id="durationInput"
+                  id="sessionInput"
                   class="duration-input"
-                  placeholder="25:00 or type"
+                  placeholder="Select"
+                  readonly
                 />
+              </div>
 
-                <button id="openDropdown" class="dropdown-btn"></button>
-
-                <div id="dropdownList" class="dropdown-list">
-                  <div class="dropdown-item" data-value="15:00">
-                    15:00 — Short Break
-                  </div>
-                  <div class="dropdown-item" data-value="25:00">
-                    25:00 — Pomodoro
-                  </div>
-                  <div class="dropdown-item" data-value="45:00">
-                    45:00 — Deep Work
-                  </div>
-                  <div class="dropdown-item" data-value="60:00">
-                    60:00 — Long Session
-                  </div>
-                </div>
+              <div class="time-field">
+                <div class="section-label">Break time</div>
+                <input
+                  id="breakInput"
+                  class="duration-input"
+                  placeholder="Select"
+                  readonly
+                />
               </div>
 
               <button id="addBtn" class="add-btn">+</button>
@@ -376,6 +634,34 @@
           <label class="section-label">Your Schedule</label>
           <div id="taskList" class="task-list"></div>
         </div>
+
+        <!-- picker -->
+        <div class="picker-overlay" id="timePicker">
+          <div class="picker-backdrop" id="pickerBackdrop"></div>
+
+          <div class="picker-sheet" role="dialog" aria-modal="true">
+            <div class="picker-header">
+              <button class="picker-cancel" id="pickerCancel">Cancel</button>
+              <div class="picker-title" id="pickerTitle">Set Time</div>
+              <button class="picker-save" id="pickerSave">Save</button>
+            </div>
+
+            <div class="picker-body">
+              <div class="wheel-col">
+                <div class="wheel-highlight"></div>
+                <div class="wheel-scroll" id="wheelHours"></div>
+                <div class="wheel-label">hrs</div>
+              </div>
+
+              <div class="wheel-col">
+                <div class="wheel-highlight"></div>
+                <div class="wheel-scroll" id="wheelMins"></div>
+                <div class="wheel-label">min</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /picker -->
       </div>
     </div>
 
@@ -383,53 +669,350 @@
       const calendarGrid = document.getElementById("calendarGrid");
       const dateDisplay = document.getElementById("dateDisplay");
       const taskInput = document.getElementById("taskInput");
-      const durationInput = document.getElementById("durationInput");
-      const openDropdown = document.getElementById("openDropdown");
-      const dropdownList = document.getElementById("dropdownList");
+      const sessionInput = document.getElementById("sessionInput");
+      const breakInput = document.getElementById("breakInput");
       const addBtn = document.getElementById("addBtn");
       const taskList = document.getElementById("taskList");
 
       let selectedBox = null;
       let selectedDay = null;
+
+      // store per-day tasks in memory
       const stored = {};
 
-      function formatTime(value) {
-        if (/^\d{1,3}:\d{2}$/.test(value)) return value;
-        if (/^\d{1,3}$/.test(value)) return value.padStart(2, "0") + ":00";
-        return null;
+      /* =========================
+     UI popup (instead of alert)
+     ========================= */
+      function showPopup(title, msg) {
+        const pop = document.createElement("div");
+        pop.className = "popup-overlay";
+        pop.innerHTML = `
+      <div class="popup-dim"></div>
+      <div class="popup-box">
+        <h3>${title}</h3>
+        <p>${msg}</p>
+        <div class="popup-actions">
+          <button class="popup-btn">OK</button>
+        </div>
+      </div>
+    `;
+        document.body.appendChild(pop);
+
+        const close = () => pop.remove();
+        pop.querySelector(".popup-btn").onclick = close;
+        pop.querySelector(".popup-dim").onclick = close;
       }
 
+      /* =========================
+     TIME FORMAT (match main.html)
+     - Display/store: MM:SS (e.g. 25:00)
+     - Parse: MM:SS (minutes <= 60)
+     ========================= */
+      function toMMSSFromMinutes(totalMins) {
+        const m = Math.max(0, parseInt(totalMins, 10) || 0);
+        return String(m).padStart(2, "0") + ":00";
+      }
+
+      function minutesFromMMSS(s) {
+        const match = /^(\d{1,2}):([0-5]\d)$/.exec(String(s).trim());
+        if (!match) return null;
+        return parseInt(match[1], 10);
+      }
+
+      /* =========================
+     FRIEND DATA (reuse Friends page localStorage)
+     ========================= */
+      const FRIENDS_KEY = "petpact_friends";
+
+      function defaultFriends() {
+        return [
+          { id: "maya", name: "Maya", emoji: "🐱", pending: false },
+          { id: "thu", name: "Thu", emoji: "🐰", pending: false },
+          { id: "qing", name: "Qing", emoji: "🦊", pending: true },
+        ];
+      }
+
+      function loadFriends() {
+        const raw = localStorage.getItem(FRIENDS_KEY);
+        if (!raw) return defaultFriends();
+        try {
+          const arr = JSON.parse(raw);
+          return Array.isArray(arr) ? arr : defaultFriends();
+        } catch (e) {
+          return defaultFriends();
+        }
+      }
+
+      function getActiveFriends() {
+        return loadFriends().filter((f) => !f.pending);
+      }
+
+      /* =========================
+     SHARE / INVITE FLOW (MULTI SELECT)
+     - Buttons are your SAME popup buttons (Cancel/Send at bottom)
+     - NOT in header
+     ========================= */
+      function openFriendSelector(task) {
+        const friends = getActiveFriends();
+        const selectedIds = new Set();
+
+        const appScreen = document.querySelector(".app-screen");
+
+        const overlay = document.createElement("div");
+        overlay.style.position = "absolute";
+        overlay.style.inset = "0";
+        overlay.style.zIndex = "300";
+        overlay.innerHTML = `
+      <div class="picker-backdrop" data-close="1"></div>
+
+      <div class="picker-sheet" role="dialog" aria-modal="true" style="bottom: 14px;">
+        <div style="padding: 14px 14px 10px;">
+          <div style="
+            text-align:center;
+            font-size: 15px;
+            font-weight: 900;
+            color: var(--ink);
+            margin-bottom: 4px;
+          ">Share session</div>
+
+          <div style="
+            font-size: 11px;
+            font-weight: 900;
+            color: rgba(31,31,31,0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display:flex;
+            align-items:center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+          ">
+            <span>Friends</span>
+            <span id="shareCount" style="color: rgba(31,31,31,0.45);">0 selected</span>
+          </div>
+
+          <div id="shareFriendList" style="display:flex; flex-direction:column; gap:8px; margin-bottom: 12px;"></div>
+
+          <!-- bottom buttons: SAME style as your popup -->
+          <div class="popup-actions" style="display:flex; gap:10px; justify-content:center;">
+            <button class="popup-btn" id="shareCancel"
+              style="flex:1; background: rgba(var(--cream-rgb), 0.45); color: var(--ink); border: 2px solid rgba(31,31,31,0.12); box-shadow:none;">
+              Cancel
+            </button>
+            <button class="popup-btn" id="shareSend"
+              style="flex:1;">
+              Send
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+        appScreen.appendChild(overlay);
+
+        const countEl = overlay.querySelector("#shareCount");
+        const listEl = overlay.querySelector("#shareFriendList");
+
+        function updateCount() {
+          countEl.textContent = `${selectedIds.size} selected`;
+        }
+
+        function close() {
+          overlay.remove();
+        }
+
+        overlay.querySelector("[data-close='1']").onclick = close;
+        overlay.querySelector("#shareCancel").onclick = close;
+
+        function makeFriendRow(f) {
+          const row = document.createElement("div");
+          row.style.display = "flex";
+          row.style.alignItems = "center";
+          row.style.justifyContent = "space-between";
+          row.style.gap = "10px";
+          row.style.padding = "10px 12px";
+          row.style.borderRadius = "14px";
+          row.style.background = "rgba(var(--cream-rgb), 0.30)";
+          row.style.border = "2px solid rgba(31,31,31,0.08)";
+          row.style.boxShadow = "0 2px 4px rgba(0,0,0,0.06)";
+          row.style.cursor = "pointer";
+          row.style.userSelect = "none";
+
+          // LEFT: selection dot + profile + name
+          const left = document.createElement("div");
+          left.style.display = "flex";
+          left.style.alignItems = "center";
+          left.style.gap = "10px";
+          left.style.minWidth = "0";
+
+          const dot = document.createElement("div");
+          dot.style.width = "18px";
+          dot.style.height = "18px";
+          dot.style.borderRadius = "50%";
+          dot.style.border = "2px solid rgba(31,31,31,0.25)";
+          dot.style.display = "flex";
+          dot.style.alignItems = "center";
+          dot.style.justifyContent = "center";
+          dot.style.fontSize = "11px";
+          dot.style.color = "var(--bg)";
+          dot.style.flex = "0 0 auto";
+
+          const avatar = document.createElement("div");
+          avatar.style.width = "30px";
+          avatar.style.height = "30px";
+          avatar.style.borderRadius = "50%";
+          avatar.style.background = "rgba(var(--cream-rgb), 0.65)";
+          avatar.style.border = "2px solid rgba(31,31,31,0.10)";
+          avatar.style.display = "flex";
+          avatar.style.alignItems = "center";
+          avatar.style.justifyContent = "center";
+          avatar.style.fontSize = "18px";
+          avatar.textContent = f.emoji || "🐶";
+
+          const name = document.createElement("div");
+          name.style.fontSize = "13px";
+          name.style.fontWeight = "900";
+          name.style.color = "var(--ink)";
+          name.style.whiteSpace = "nowrap";
+          name.style.overflow = "hidden";
+          name.style.textOverflow = "ellipsis";
+          name.textContent = f.name;
+
+          left.appendChild(dot);
+          left.appendChild(avatar);
+          left.appendChild(name);
+
+          row.appendChild(left);
+
+          function applySelectedUI(isSel) {
+            if (isSel) {
+              row.style.background = "rgba(var(--cream-rgb), 0.20)";
+              row.style.border = "2px solid rgba(243,176,59,0.90)";
+              row.style.boxShadow = "0 0 0 3px rgba(243,176,59,0.18) inset";
+              dot.style.background = "var(--ink)";
+              dot.style.borderColor = "var(--ink)";
+              dot.innerHTML = `<i class="fa-solid fa-check" style="font-size:10px;"></i>`;
+            } else {
+              row.style.background = "rgba(var(--cream-rgb), 0.30)";
+              row.style.border = "2px solid rgba(31,31,31,0.08)";
+              row.style.boxShadow = "0 2px 4px rgba(0,0,0,0.06)";
+              dot.style.background = "transparent";
+              dot.style.borderColor = "rgba(31,31,31,0.25)";
+              dot.innerHTML = "";
+            }
+          }
+
+          applySelectedUI(false);
+
+          row.onclick = () => {
+            if (selectedIds.has(f.id)) selectedIds.delete(f.id);
+            else selectedIds.add(f.id);
+            applySelectedUI(selectedIds.has(f.id));
+            updateCount();
+          };
+
+          return row;
+        }
+
+        if (friends.length === 0) {
+          const empty = document.createElement("div");
+          empty.style.padding = "10px 2px";
+          empty.style.fontSize = "12px";
+          empty.style.fontWeight = "900";
+          empty.style.color = "rgba(31,31,31,0.55)";
+          empty.textContent = "No friends yet.";
+          listEl.appendChild(empty);
+        } else {
+          friends.forEach((f) => listEl.appendChild(makeFriendRow(f)));
+        }
+
+        updateCount();
+
+        overlay.querySelector("#shareSend").onclick = () => {
+          if (selectedIds.size === 0) {
+            showPopup(
+              "No Friend Selected",
+              "Pick at least one friend to send."
+            );
+            return;
+          }
+
+          const selectedFriends = friends.filter((f) => selectedIds.has(f.id));
+          selectedFriends.forEach((f) => sendInviteToFriend(f, task));
+
+          close();
+          showPopup(
+            "Sent",
+            `Sent to ${selectedFriends.map((x) => x.name).join(", ")}.`
+          );
+        };
+      }
+
+      function sendInviteToFriend(friend, task) {
+        const payload = {
+          toFriendId: friend.id,
+          toFriendName: friend.name,
+          from: "You",
+          taskName: task.text,
+          sessionMins: minutesFromMMSS(task.session) ?? 25,
+          breakMins: minutesFromMMSS(task.break) ?? 5,
+          createdAt: Date.now(),
+        };
+
+        const key = "petpact_outgoing_invites";
+        const existing = JSON.parse(localStorage.getItem(key) || "[]");
+        existing.push(payload);
+        localStorage.setItem(key, JSON.stringify(existing));
+      }
+
+      /* =========================
+     RENDER TASKS (share icon INSIDE card)
+     ========================= */
       function renderTasks() {
         taskList.innerHTML = "";
         if (!selectedDay || !stored[selectedDay]) return;
 
-        // newest on top
         [...stored[selectedDay]].reverse().forEach((t) => {
           const card = document.createElement("div");
           card.className = "task-card";
-          card.innerHTML = `
-            <span>${t.text}</span>
-            <span class="time-tag">${t.time}</span>
-          `;
 
-          // CLICK = send task to timer (main.html)
+          card.innerHTML = `
+        <span>${t.text}</span>
+        <span class="task-right" style="display:flex; align-items:center; gap:8px;">
+          <span class="time-tags">
+            <span class="time-tag accent">${t.session}</span>
+            <span class="time-tag">${t.break}</span>
+          </span>
+
+          <button type="button" class="share-btn" aria-label="Share session">
+            <i class="fa-solid fa-share"></i>
+          </button>
+        </span>
+      `;
+
           card.onclick = () => {
-            // t.time is in "mm:ss" format, we only need minutes
-            const parts = t.time.split(":");
-            const mins = parseInt(parts[0], 10) || 25;
+            const sessionMins = minutesFromMMSS(t.session) ?? 25;
+            const breakMins = minutesFromMMSS(t.break) ?? 5;
 
             localStorage.setItem("petpact_taskName", t.text);
-            localStorage.setItem("petpact_taskMinutes", mins.toString());
+            localStorage.setItem("petpact_taskMinutes", String(sessionMins));
+            localStorage.setItem("petpact_breakMinutes", String(breakMins));
 
-            // go to timer screen
             window.location.href = "main.html";
+          };
+
+          const shareBtn = card.querySelector(".share-btn");
+          shareBtn.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openFriendSelector(t);
           };
 
           taskList.appendChild(card);
         });
       }
 
-      // Build calendar (1–31)
+      /* =========================
+     BUILD CALENDAR (1–31)
+     ========================= */
       for (let i = 1; i <= 31; i++) {
         const box = document.createElement("div");
         box.className = "day-box";
@@ -440,6 +1023,7 @@
           box.classList.add("selected");
           selectedBox = box;
           selectedDay = i;
+
           dateDisplay.textContent = `December ${i}, 2025`;
           renderTasks();
         };
@@ -447,49 +1031,203 @@
         calendarGrid.appendChild(box);
       }
 
-      // Dropdown open/close
-      openDropdown.onclick = () => {
-        dropdownList.style.display =
-          dropdownList.style.display === "block" ? "none" : "block";
-      };
+      /* =========================
+     WHEEL PICKER (MAX 60 mins)
+     ========================= */
+      const picker = document.getElementById("timePicker");
+      const pickerBackdrop = document.getElementById("pickerBackdrop");
+      const pickerCancel = document.getElementById("pickerCancel");
+      const pickerSave = document.getElementById("pickerSave");
+      const pickerTitle = document.getElementById("pickerTitle");
+      const wheelHours = document.getElementById("wheelHours");
+      const wheelMins = document.getElementById("wheelMins");
 
-      document.querySelectorAll(".dropdown-item").forEach((opt) => {
-        opt.onclick = () => {
-          durationInput.value = opt.dataset.value;
-          dropdownList.style.display = "none";
-        };
+      let activeTarget = null;
+      let hScrollT = null;
+      let mScrollT = null;
+
+      function buildWheel(el, values, formatFn) {
+        el.innerHTML = "";
+        values.forEach((v) => {
+          const item = document.createElement("div");
+          item.className = "wheel-item";
+          item.dataset.value = String(v);
+          item.textContent = formatFn ? formatFn(v) : String(v);
+          el.appendChild(item);
+        });
+      }
+
+      function snapAndSelect(el) {
+        const items = Array.from(el.querySelectorAll(".wheel-item"));
+        const centerY = el.scrollTop + el.clientHeight / 2;
+
+        let best = null;
+        let bestDist = Infinity;
+
+        for (const it of items) {
+          const itCenter = it.offsetTop + it.offsetHeight / 2;
+          const d = Math.abs(itCenter - centerY);
+          if (d < bestDist) {
+            bestDist = d;
+            best = it;
+          }
+        }
+        if (!best) return;
+
+        const targetTop =
+          best.offsetTop - (el.clientHeight / 2 - best.offsetHeight / 2);
+        el.scrollTo({ top: targetTop, behavior: "smooth" });
+
+        items.forEach((x) => x.classList.remove("selected"));
+        best.classList.add("selected");
+      }
+
+      function setWheelValue(el, value) {
+        const it = el.querySelector(`.wheel-item[data-value="${value}"]`);
+        if (!it) return;
+        const targetTop =
+          it.offsetTop - (el.clientHeight / 2 - it.offsetHeight / 2);
+        el.scrollTop = targetTop;
+        snapAndSelect(el);
+      }
+
+      function getWheelValue(el) {
+        const items = Array.from(el.querySelectorAll(".wheel-item"));
+        const centerY = el.scrollTop + el.clientHeight / 2;
+
+        let best = items[0];
+        let bestDist = Infinity;
+
+        for (const it of items) {
+          const itCenter = it.offsetTop + it.offsetHeight / 2;
+          const d = Math.abs(itCenter - centerY);
+          if (d < bestDist) {
+            bestDist = d;
+            best = it;
+          }
+        }
+        return parseInt(best?.dataset?.value || "0", 10);
+      }
+
+      function attachWheel(el, which) {
+        el.addEventListener("scroll", () => {
+          if (which === "h") {
+            clearTimeout(hScrollT);
+            hScrollT = setTimeout(() => snapAndSelect(el), 80);
+          } else {
+            clearTimeout(mScrollT);
+            mScrollT = setTimeout(() => snapAndSelect(el), 80);
+          }
+        });
+      }
+
+      buildWheel(wheelHours, [0, 1], (v) => String(v));
+      buildWheel(
+        wheelMins,
+        Array.from({ length: 60 }, (_, i) => i),
+        (v) => String(v).padStart(2, "0")
+      );
+
+      attachWheel(wheelHours, "h");
+      attachWheel(wheelMins, "m");
+
+      function openPicker(target) {
+        activeTarget = target;
+        pickerTitle.textContent =
+          target === "session" ? "Set Study Time" : "Set Break Time";
+
+        const current =
+          target === "session" ? sessionInput.value : breakInput.value;
+
+        const fallback = target === "session" ? 25 : 5;
+        let totalMinutes = minutesFromMMSS(current) ?? fallback;
+
+        totalMinutes = Math.max(1, Math.min(60, totalMinutes));
+
+        const h = Math.floor(totalMinutes / 60);
+        const m = totalMinutes % 60;
+
+        picker.classList.add("open");
+        setWheelValue(wheelHours, h);
+        setWheelValue(wheelMins, m);
+      }
+
+      function closePicker() {
+        picker.classList.remove("open");
+        activeTarget = null;
+      }
+
+      sessionInput.addEventListener("click", () => openPicker("session"));
+      breakInput.addEventListener("click", () => openPicker("break"));
+
+      pickerBackdrop.addEventListener("click", closePicker);
+      pickerCancel.addEventListener("click", closePicker);
+
+      pickerSave.addEventListener("click", () => {
+        const h = getWheelValue(wheelHours);
+        const m = getWheelValue(wheelMins);
+
+        let totalMinutes = h * 60 + m;
+        if (totalMinutes < 1) totalMinutes = 1;
+        if (totalMinutes > 60) totalMinutes = 60;
+
+        if (activeTarget === "session")
+          sessionInput.value = toMMSSFromMinutes(totalMinutes);
+        else if (activeTarget === "break")
+          breakInput.value = toMMSSFromMinutes(totalMinutes);
+
+        closePicker();
       });
 
-      // Add schedule
+      /* =========================
+     VALIDATION + ADD
+     ========================= */
+      function missingFields() {
+        const missing = [];
+        if (!selectedDay) missing.push("date");
+        if (!taskInput.value.trim()) missing.push("task");
+        if (!sessionInput.value.trim()) missing.push("study time");
+        if (!breakInput.value.trim()) missing.push("break time");
+        return missing;
+      }
+
       addBtn.onclick = () => {
-        if (!selectedDay) {
-          alert("Pick a date first");
+        const missing = missingFields();
+        if (missing.length) {
+          showPopup("Missing", "Please set: " + missing.join(", "));
           return;
         }
 
         const text = taskInput.value.trim();
-        const raw = durationInput.value.trim();
-        const time = formatTime(raw);
+        const session = sessionInput.value.trim();
+        const brk = breakInput.value.trim();
 
-        if (!text) {
-          alert("Task cannot be empty");
+        const sMins = minutesFromMMSS(session);
+        const bMins = minutesFromMMSS(brk);
+
+        if (sMins === null || sMins < 1 || sMins > 60) {
+          showPopup("Invalid", "Study time must be between 1 and 60 minutes.");
           return;
         }
-        if (!time) {
-          alert("Valid format: mm:ss OR minutes");
+        if (bMins === null || bMins < 1 || bMins > 60) {
+          showPopup("Invalid", "Break time must be between 1 and 60 minutes.");
           return;
         }
 
         stored[selectedDay] = stored[selectedDay] || [];
-        stored[selectedDay].push({ text, time });
+        stored[selectedDay].push({
+          text,
+          session: toMMSSFromMinutes(sMins),
+          break: toMMSSFromMinutes(bMins),
+        });
 
-        // mark with paw stamp
         selectedBox.classList.add("stamped");
         selectedBox.textContent = "🐾";
 
         taskInput.value = "";
-        durationInput.value = "";
-        dropdownList.style.display = "none";
+        sessionInput.value = "";
+        breakInput.value = "";
+
         renderTasks();
       };
     </script>
