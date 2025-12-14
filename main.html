@@ -19,7 +19,6 @@
       href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap"
       rel="stylesheet"
     />
-
     <style>
       /* --- THEME VARIABLES --- */
       :root {
@@ -29,7 +28,15 @@
         --cream: #ede3be;
         --cream-rgb: 237, 227, 190;
         --danger: #f3543b;
+
+        /* --- FONT WEIGHT SCALE --- */
+        --w-regular: 400;
+        --w-medium: 500;
+        --w-semibold: 600;
+        --w-bold: 700;
+        --w-black: 900;
       }
+
       @font-face {
         font-family: "BP Child Fatty";
         src: url("./fonts/bpchildfatty.regular.ttf") format("truetype");
@@ -43,7 +50,7 @@
         padding: 0;
         box-sizing: border-box;
         font-family: "DynaPuff", system-ui, sans-serif;
-        font-weight: 400;
+        font-weight: var(--w-regular);
       }
 
       body {
@@ -52,6 +59,59 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
+      }
+
+      /* ------ FONT WEIGHTS ONLY (clean + consistent) ------ */
+      .menu-btn {
+        font-weight: var(--w-semibold);
+      }
+      .focus-tag {
+        font-weight: var(--w-medium);
+      }
+      .streak-badge,
+      .user-name {
+        font-weight: var(--w-semibold);
+      }
+
+      .user-avatar {
+        font-weight: var(--w-bold);
+      }
+
+      .timer-text {
+        font-weight: var(--w-semibold);
+      }
+
+      .action-btn,
+      .resume-big,
+      .end-big,
+      .popup-btn,
+      .popup-box h3,
+      .picker-title,
+      .picker-header button {
+        font-weight: var(--w-bold);
+      }
+
+      .popup-box p,
+      .wheel-item {
+        font-weight: var(--w-regular);
+      }
+
+      .menu-title {
+        font-weight: var(--w-black); /* keep boldest */
+      }
+
+      .menu-subtitle,
+      .menu-footer {
+        font-weight: var(--w-medium);
+      }
+
+      .menu-close {
+        font-weight: var(--w-bold);
+      }
+
+      .menu-item,
+      .wheel-label {
+        font-weight: var(--w-medium);
       }
 
       /* --- PHONE FRAME --- */
@@ -101,7 +161,7 @@
         background: none;
         border: none;
         font-size: 22px;
-        font-weight: 900;
+
         color: var(--ink);
         cursor: pointer;
         line-height: 1;
@@ -118,7 +178,7 @@
         padding: 6px 10px;
         border-radius: 999px;
         font-size: 13px;
-        font-weight: 900;
+
         color: var(--ink);
         display: flex;
         align-items: center;
@@ -148,11 +208,10 @@
         place-items: center;
         color: var(--ink);
         font-size: 12px;
-        font-weight: 900;
       }
       .user-name {
         font-size: 12px;
-        font-weight: 900;
+
         color: var(--ink);
         max-width: 96px;
         overflow: hidden;
@@ -174,7 +233,7 @@
         background: var(--accent);
         color: var(--ink);
         font-size: 13px;
-        font-weight: 900;
+
         padding: 7px 16px;
         border-radius: 999px;
         display: flex;
@@ -259,7 +318,7 @@
 
       .timer-text {
         font-size: 52px;
-        font-weight: 900;
+
         color: var(--ink);
         margin-bottom: 18px;
         letter-spacing: 1px;
@@ -273,7 +332,7 @@
         border: none;
         border-radius: 28px;
         font-size: 16px;
-        font-weight: 900;
+
         cursor: pointer;
         transition: 0.15s;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
@@ -302,7 +361,7 @@
         padding: 14px;
         border-radius: 24px;
         font-size: 16px;
-        font-weight: 900;
+
         border: none;
         cursor: pointer;
       }
@@ -350,7 +409,7 @@
 
       .popup-box h3 {
         font-size: 19px;
-        font-weight: 900;
+
         color: var(--ink);
         margin-bottom: 8px;
       }
@@ -358,7 +417,6 @@
         font-size: 13px;
         color: rgba(31, 31, 31, 0.75);
         margin-bottom: 18px;
-        font-weight: 800;
       }
 
       .popup-actions {
@@ -370,7 +428,7 @@
         padding: 11px;
         border-radius: 14px;
         border: none;
-        font-weight: 900;
+
         font-size: 14px;
         cursor: pointer;
       }
@@ -429,14 +487,13 @@
       .menu-title {
         font-family: "BP Child Fatty", "Nunito", sans-serif;
         font-size: 26px;
-        font-weight: 900;
+
         color: var(--ink);
         letter-spacing: 2px;
         margin-bottom: 6px;
       }
       .menu-subtitle {
         font-size: 11px;
-        font-weight: 800;
         color: rgba(31, 31, 31, 0.6);
         margin-bottom: 18px;
       }
@@ -445,7 +502,7 @@
         background: none;
         border: none;
         font-size: 18px;
-        font-weight: 900;
+
         color: var(--ink);
         cursor: pointer;
         margin-bottom: 8px;
@@ -462,7 +519,7 @@
         border-radius: 14px;
         padding: 10px 12px;
         font-size: 13px;
-        font-weight: 900;
+
         cursor: pointer;
         background: rgba(var(--cream-rgb), 0.25);
         color: var(--ink);
@@ -486,7 +543,6 @@
         margin-top: auto;
         font-size: 10px;
         color: rgba(31, 31, 31, 0.45);
-        font-weight: 800;
       }
 
       /* --- PICKER --- */
@@ -534,7 +590,7 @@
         background: none;
         border: none;
         font-size: 15px;
-        font-weight: 900;
+
         cursor: pointer;
       }
 
@@ -548,7 +604,6 @@
       .picker-title {
         color: var(--ink);
         font-size: 15px;
-        font-weight: 900;
       }
 
       .picker-body {
@@ -584,7 +639,6 @@
 
         scroll-snap-align: center;
         font-size: 20px;
-        font-weight: 900;
 
         color: rgba(31, 31, 31, 0.35);
         user-select: none;
@@ -613,7 +667,7 @@
         top: 50%;
         transform: translateY(-50%);
         font-size: 11px;
-        font-weight: 900;
+
         letter-spacing: 1px;
         color: rgba(31, 31, 31, 0.35);
         pointer-events: none;
@@ -684,7 +738,7 @@
           <div class="menu-panel">
             <button class="menu-close" id="menuClose">✕</button>
             <div class="menu-title">pet pact</div>
-            <div class="menu-subtitle">Your focus, your pact.</div>
+            <div class="menu-subtitle">Your focus, your pact</div>
 
             <div class="menu-items">
               <button class="menu-item primary" id="menuHome">
@@ -781,19 +835,17 @@
     </div>
 
     <script>
-      /* =========================
-     ✅ PetPact main.html script (updated)
-     - Friend/calendar/solo label always correct
-     - Friend session clears on END / abort / finish break
-     ========================= */
-
       /* ---------- STORAGE KEYS ---------- */
       const TASK_NAME_KEY = "petpact_taskName";
       const TASK_MIN_KEY = "petpact_taskMinutes";
       const BREAK_MIN_KEY = "petpact_breakMinutes";
-      const ACTIVE_CTX_KEY = "petpact_active_context"; // {type:"friend", label:"Study with ...", friendNames:[...], createdAt:number}
+      const ACTIVE_CTX_KEY = "petpact_active_context";
 
-      /* ---------- CORE VALUES ---------- */
+      const TOTAL_MINUTES_KEY = "petpact_total_minutes";
+      const SESSION_COUNT_KEY = "petpact_session_count";
+      const BEST_STREAK_KEY = "petpact_best_streak";
+
+      /* ---------- CORE DOM ---------- */
       const pet = document.getElementById("petCircle");
       const petImg = document.getElementById("petImg");
       const timerEl = document.getElementById("timeLeft");
@@ -809,10 +861,7 @@
       const userChip = document.getElementById("userChip");
       const userNameEl = document.getElementById("userName");
 
-      const TOTAL_MINUTES_KEY = "petpact_total_minutes";
-      const SESSION_COUNT_KEY = "petpact_session_count";
-      const BEST_STREAK_KEY = "petpact_best_streak";
-
+      /* ---------- STATS ---------- */
       let totalMinutes =
         parseInt(localStorage.getItem(TOTAL_MINUTES_KEY), 10) || 0;
       let sessionCount =
@@ -830,16 +879,16 @@
           return null;
         }
       }
-      function clearFriendContext() {
-        const ctx = getActiveContext();
-        if (ctx && ctx.type === "friend")
-          localStorage.removeItem(ACTIVE_CTX_KEY);
+
+      function clearSessionLabelToStudyMode() {
+        localStorage.removeItem(ACTIVE_CTX_KEY); // friend label
+        localStorage.removeItem(TASK_NAME_KEY);
       }
+
       function renderModeTag() {
         const ctx = getActiveContext();
         const taskName = (localStorage.getItem(TASK_NAME_KEY) || "").trim();
 
-        // Priority: friend -> task -> default
         if (ctx && ctx.type === "friend" && ctx.label) {
           modeTag.innerHTML = `<i class="fa-solid fa-users"></i> ${ctx.label}`;
           return;
@@ -851,7 +900,7 @@
         modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> Study Mode`;
       }
 
-      /* ---------- TIMER BASED ON TASK MINUTES (or default 25) ---------- */
+      /* ---------- TIMER BASED ON TASK MINUTES ---------- */
       function readFocusTotalSeconds() {
         const storedTaskMinutesStr = localStorage.getItem(TASK_MIN_KEY);
         if (storedTaskMinutesStr) {
@@ -963,7 +1012,6 @@
         timerRunning = false;
         clearInterval(interval);
 
-        // re-read focus time (in case user came from calendar/task)
         focusTotal = readFocusTotalSeconds();
         total = focusTotal;
         remain = total;
@@ -1034,7 +1082,6 @@
         btn.textContent = "GIVE UP";
         btn.className = "action-btn btn-giveup";
 
-        // always re-read in case task minutes changed right before start
         focusTotal = readFocusTotalSeconds();
         total = focusTotal;
         remain = total;
@@ -1091,8 +1138,7 @@
         setPetFace("angry");
         lockIdleFace = true;
 
-        // ✅ when user ends session, drop friend session context so it goes back to solo/task
-        clearFriendContext();
+        clearSessionLabelToStudyMode();
 
         resetToFocusIdle();
       }
@@ -1129,6 +1175,7 @@
         resumeRow.style.display = "none";
         btn.textContent = "START BREAK";
         btn.className = "action-btn btn-start";
+
         modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> Break Ready`;
       }
 
@@ -1163,7 +1210,7 @@
         interval = setInterval(tick, 1000);
       }
 
-      function finishBreakToFocus(happyOrAngry, reasonText) {
+      function finishBreakToStudyMode(happyOrAngry, reasonText) {
         clearInterval(interval);
         timerRunning = false;
 
@@ -1175,8 +1222,7 @@
           document.documentElement
         ).getPropertyValue("--accent");
 
-        // ✅ when break ends and we return to focus start screen, drop friend context
-        clearFriendContext();
+        clearSessionLabelToStudyMode();
 
         mode = "focus";
         focusTotal = readFocusTotalSeconds();
@@ -1191,7 +1237,6 @@
         btn.className = "action-btn btn-start";
         resumeRow.style.display = "none";
 
-        // If the user failed to come back, show reason; otherwise show correct label
         if (!happyOrAngry && reasonText) {
           modeTag.innerHTML = `<i class="fa-solid fa-circle"></i> ${reasonText}`;
         } else {
@@ -1206,9 +1251,9 @@
 
         const pop = ask(
           "Break Finished!",
-          "Break is over. Tap YES to start focus now.",
+          "Break is over. Tap YES to return to Study Mode.",
           function () {
-            finishBreakToFocus(true);
+            finishBreakToStudyMode(true);
           }
         );
 
@@ -1216,7 +1261,7 @@
         const t = setTimeout(() => {
           if (!document.body.contains(pop)) return;
           pop.remove();
-          finishBreakToFocus(false, "You didn't come back in time");
+          finishBreakToStudyMode(false, "You didn't come back in time");
         }, timeoutMs);
 
         pop.addEventListener("click", () => clearTimeout(t), { once: true });
@@ -1237,18 +1282,21 @@
             startBreak
           );
         } else if (mode === "break" && text === "END BREAK") {
-          ask(
-            "End Break?",
-            "Finish your break and go back to focus mode?",
-            () => finishBreakToFocus(true)
+          ask("End Break?", "Finish your break and return to Study Mode?", () =>
+            finishBreakToStudyMode(true)
           );
         }
       };
 
       resumeBtn.onclick = () =>
         ask("Resume?", "Continue where you left off?", resumeFocus);
+
       endBtn.onclick = () =>
-        ask("End Session?", "This will reset your session.", abortSession);
+        ask(
+          "End Session?",
+          "This will reset your session to Study Mode.",
+          abortSession
+        );
 
       /* ---------- USER CHIP NAV ---------- */
       function goProfile() {
@@ -1263,7 +1311,7 @@
       });
 
       /* =========================
-     ✅ iOS WHEEL PICKER LOGIC (unchanged from your behavior)
+     iOS WHEEL PICKER LOGIC
      ========================= */
       const picker = document.getElementById("timePicker");
       const pickerBackdrop = document.getElementById("pickerBackdrop");
@@ -1393,7 +1441,7 @@
           return;
         }
 
-        if (mode === "break-ready" || mode === "focus") {
+        if (mode === "break-ready") {
           focusTotal = newFocusTotal;
           total = focusTotal;
           remain = total;
@@ -1481,14 +1529,15 @@
         localStorage.removeItem(ACTIVE_CTX_KEY);
         localStorage.removeItem(TASK_NAME_KEY);
         localStorage.removeItem(TASK_MIN_KEY);
-        window.location.href = "index.html";
+        window.location.href = "login.html";
       });
 
       /* ---------- KEEP UI FRESH ON RETURN ---------- */
       window.addEventListener("focus", () => {
         refreshUsername();
+
         renderModeTag();
-        // also refresh focusTotal display baseline if user came from calendar
+
         if (!timerRunning && (mode === "focus" || mode === "focus-paused")) {
           focusTotal = readFocusTotalSeconds();
           total = focusTotal;

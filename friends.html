@@ -27,6 +27,13 @@
         --cream: #ede3be;
         --cream-rgb: 237, 227, 190;
         --danger: #f3543b;
+
+        /* --- ADDED FONT WEIGHT SCALE for consistency --- */
+        --w-regular: 400;
+        --w-medium: 500;
+        --w-semibold: 600;
+        --w-bold: 700;
+        --w-black: 900;
       }
 
       * {
@@ -34,6 +41,8 @@
         padding: 0;
         box-sizing: border-box;
         font-family: "DynaPuff", system-ui, sans-serif;
+        /* Defaulting to regular */
+        font-weight: var(--w-regular);
       }
 
       body {
@@ -92,25 +101,49 @@
         align-items: center;
         margin-bottom: 16px;
       }
+      /* .header-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 35px 20px 10px;
+      } */
+
       .back-btn {
         background: none;
         border: none;
         color: var(--ink);
         font-size: 20px;
-        font-weight: 900;
+        font-weight: var(--w-black);
         cursor: pointer;
       }
       .page-title {
         flex: 1;
         text-align: center;
         font-size: 16px;
-        font-weight: 900;
+        font-weight: var(--w-bold);
         letter-spacing: 2px;
         color: var(--ink);
         text-transform: uppercase;
         margin-right: 20px;
       }
 
+      .content {
+        flex: 1;
+        padding: 10px 20px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow-y: auto;
+      }
+      .content::-webkit-scrollbar {
+        display: none;
+      }
+      .content {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      /* CARD & LABELS */
       .card {
         background: rgba(var(--cream-rgb), 0.32);
         border-radius: 22px;
@@ -122,7 +155,6 @@
 
       .section-label {
         font-size: 11px;
-        font-weight: 900;
         color: rgba(31, 31, 31, 0.6);
         margin-bottom: 8px;
         text-transform: uppercase;
@@ -132,10 +164,13 @@
         justify-content: space-between;
         gap: 10px;
       }
-
+      .section-label span {
+        font-weight: var(--w-semibold);
+        font-size: 11px;
+      }
       .count-chip {
         font-size: 11px;
-        font-weight: 900;
+        font-weight: var(--w-semibold);
         color: rgba(31, 31, 31, 0.55);
       }
 
@@ -158,43 +193,27 @@
         user-select: none;
       }
 
-      .friend-row.pending {
-        opacity: 0.75;
-      }
-
-      .friend-row.selectable {
-        cursor: pointer;
-      }
-
-      .friend-row.selected {
-        background: rgba(var(--cream-rgb), 0.2);
-        border: 2px solid rgba(243, 176, 59, 0.9);
-        box-shadow: 0 0 0 3px rgba(243, 176, 59, 0.18) inset;
-      }
-
       .friend-left {
         display: flex;
         align-items: center;
         gap: 10px;
         min-width: 0;
       }
-
-      .select-dot {
+      .friend-row .select-dot {
         width: 18px;
         height: 18px;
+        border: 2px solid rgba(243, 176, 59, 0.35);
         border-radius: 50%;
-        border: 2px solid rgba(31, 31, 31, 0.25);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 11px;
-        color: var(--bg);
-        flex: 0 0 auto;
+        text-align: center;
       }
-
       .friend-row.selected .select-dot {
-        background: var(--ink);
-        border-color: var(--ink);
+        background: rgba(243, 176, 59, 0.35);
+        border: 2px solid rgba(243, 176, 59, 0.75);
+        border-radius: 50%;
+        color: var(--ink);
       }
 
       .avatar-circle {
@@ -208,6 +227,7 @@
         justify-content: center;
         font-size: 18px;
         flex: 0 0 auto;
+        font-weight: var(--w-bold);
       }
 
       .friend-text {
@@ -219,16 +239,17 @@
 
       .friend-name {
         font-size: 13px;
-        font-weight: 900;
+        font-weight: var(--w-semibold);
         color: var(--ink);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        letter-spacing: 0.6px;
       }
 
       .friend-sub {
-        font-size: 10px;
-        font-weight: 900;
+        font-size: 9px;
+        font-weight: var(--w-regular);
         color: rgba(31, 31, 31, 0.45);
         text-transform: uppercase;
         letter-spacing: 0.3px;
@@ -243,7 +264,7 @@
 
       .streak-chip {
         font-size: 11px;
-        font-weight: 900;
+        font-weight: var(--w-medium);
         color: var(--ink);
         padding: 4px 10px;
         border-radius: 999px;
@@ -254,7 +275,7 @@
         gap: 5px;
       }
 
-      /* INVITE ROW (under Friends List) */
+      /* INVITE ROW */
       .invite-row {
         margin-top: 10px;
         background: rgba(243, 176, 59, 0.35);
@@ -284,12 +305,14 @@
         align-items: center;
         justify-content: center;
         color: var(--ink);
-        font-size: 13px;
+        font-size: 14px;
+        font-weight: var(--w-bold);
       }
 
       .invite-text {
         font-size: 12px;
-        font-weight: 900;
+        letter-spacing: 0.6px;
+        font-weight: var(--w-semibold);
         color: var(--ink);
       }
 
@@ -298,11 +321,11 @@
         color: var(--ink);
       }
 
-      /* FRIEND SESSION (calendar-theme style) */
+      /* FRIEND SESSION */
       .session-hint {
         font-size: 12px;
-        font-weight: 900;
-        color: rgba(31, 31, 31, 0.55);
+        font-weight: var(--w-regular);
+        color: rgba(31, 31, 31, 0.45);
         line-height: 1.25;
         margin-bottom: 10px;
       }
@@ -315,7 +338,8 @@
         background: var(--accent);
         color: var(--ink);
         font-size: 13px;
-        font-weight: 900;
+        letter-spacing: 0.6px;
+        font-weight: var(--w-bold);
         cursor: pointer;
         box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
         border: 2px solid rgba(31, 31, 31, 0.1);
@@ -333,7 +357,7 @@
         border-radius: 14px;
         border: 2px solid rgba(31, 31, 31, 0.1);
         font-size: 12px;
-        font-weight: 900;
+        font-weight: var(--w-bold);
         cursor: pointer;
         box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
       }
@@ -354,62 +378,65 @@
         box-shadow: none;
       }
 
-      /* POPUPS (calendar theme) */
+      /* POPUPS */
       .popup-overlay {
         position: fixed;
-        inset: 0;
-        z-index: 999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(31, 31, 31, 0.35);
         display: flex;
-        align-items: center;
         justify-content: center;
-        padding: 18px;
-      }
-      .popup-dim {
-        position: absolute;
-        inset: 0;
-        background: rgba(31, 31, 31, 0.25);
+        align-items: center;
+        z-index: 999;
       }
       .popup-box {
-        position: relative;
-        width: min(300px, 92vw);
-        background: rgba(var(--cream-rgb), 0.92);
-        backdrop-filter: blur(14px);
+        background: var(--bg);
         border-radius: 22px;
-        padding: 16px 16px 14px;
-        border: 2px solid rgba(31, 31, 31, 0.1);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+        width: 280px;
+        padding: 22px;
         text-align: center;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.22);
+        animation: scalePop 0.25s;
+        border: 2px solid rgba(31, 31, 31, 0.08);
       }
+      @keyframes scalePop {
+        from {
+          transform: scale(0.8);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+
       .popup-box h3 {
-        font-size: 14px;
-        font-weight: 900;
+        font-size: 19px;
+        font-weight: var(--w-bold);
         color: var(--ink);
-        margin-bottom: 6px;
-        letter-spacing: 0.4px;
+        margin-bottom: 8px;
       }
       .popup-box p {
         font-size: 13px;
-        font-weight: 900;
-        color: rgba(31, 31, 31, 0.7);
-        margin-bottom: 12px;
-        line-height: 1.25;
-        white-space: pre-line;
+        color: rgba(31, 31, 31, 0.75);
+        margin-bottom: 18px;
+        font-weight: var(--w-regular);
       }
+
       .popup-actions {
         display: flex;
-        justify-content: center;
         gap: 10px;
       }
       .popup-btn {
         flex: 1;
-        border: none;
+        padding: 11px;
         border-radius: 14px;
-        padding: 10px 12px;
-        font-size: 13px;
-        font-weight: 900;
+        border: none;
+        font-weight: var(--w-bold);
+        font-size: 14px;
         cursor: pointer;
-        border: 2px solid rgba(31, 31, 31, 0.1);
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+        background: var(--accent);
+        color: var(--ink);
       }
       .popup-primary {
         background: var(--accent);
@@ -427,13 +454,13 @@
         border: 2px solid rgba(31, 31, 31, 0.08);
         background: rgba(var(--cream-rgb), 0.3);
         font-size: 13px;
-        font-weight: 900;
+        font-weight: var(--w-bold);
         color: var(--ink);
         outline: none;
       }
       .popup-input::placeholder {
         color: rgba(31, 31, 31, 0.45);
-        font-weight: 800;
+        font-weight: var(--w-medium);
       }
     </style>
   </head>
@@ -631,7 +658,7 @@
       }
 
       // ---------- SELECTION STATE ----------
-      let selectingMode = false; // IMPORTANT: only after clicking button
+      let selectingMode = false;
       const selectedIds = new Set();
 
       function updateCounts() {
@@ -671,7 +698,6 @@
           const left = document.createElement("div");
           left.className = "friend-left";
 
-          // selection dot only when selectingMode
           if (selectingMode && !f.pending) {
             const dot = document.createElement("div");
             dot.className = "select-dot";
@@ -694,7 +720,7 @@
 
           const sub = document.createElement("div");
           sub.className = "friend-sub";
-          // change "Request pending" -> "Resting"
+
           sub.textContent = f.pending ? "Resting" : "Ready to focus";
 
           textWrap.appendChild(name);
@@ -706,7 +732,6 @@
           const right = document.createElement("div");
           right.className = "friend-right";
 
-          // keep streak
           const streakChip = document.createElement("div");
           streakChip.className = "streak-chip";
           streakChip.innerHTML = `<i class="fa-solid fa-fire"></i> ${
@@ -790,7 +815,7 @@
                 friendNames: names,
                 createdAt: Date.now(),
               })
-            ); // optional but consistent
+            );
             window.location.href = "calendar.html";
           }
         );

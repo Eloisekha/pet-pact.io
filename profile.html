@@ -28,6 +28,12 @@
         --cream: #ede3be;
         --cream-rgb: 237, 227, 190;
         --danger: #f3543b;
+
+        --w-regular: 400;
+        --w-medium: 500;
+        --w-semibold: 600;
+        --w-bold: 700;
+        --w-black: 900;
       }
 
       * {
@@ -35,6 +41,7 @@
         padding: 0;
         box-sizing: border-box;
         font-family: "DynaPuff", system-ui, sans-serif;
+        font-weight: var(--w-regular);
       }
 
       body {
@@ -85,7 +92,7 @@
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 14px; /* Reduced gap slightly */
+        gap: 14px;
       }
       .scroll-content::-webkit-scrollbar {
         display: none;
@@ -102,34 +109,32 @@
         border: none;
         color: var(--ink);
         font-size: 20px;
-        font-weight: 900;
+        font-weight: var(--w-black);
         cursor: pointer;
       }
       .page-title {
         flex: 1;
         text-align: center;
         font-size: 16px;
-        font-weight: 900;
+        font-weight: var(--w-bold);
         letter-spacing: 2px;
         color: var(--ink);
         text-transform: uppercase;
         margin-right: 20px;
       }
 
-      /* HERO CARD (Profile) */
       .hero-card {
         background: rgba(var(--cream-rgb), 0.32);
         border-radius: 22px;
-        padding: 16px 14px; /* Reduced padding */
+        padding: 16px 14px;
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
         border: 2px solid rgba(31, 31, 31, 0.08);
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 8px; /* Reduced gap */
+        gap: 8px;
       }
 
-      /* Avatar: No border, soft shadow */
       .avatar-circle {
         width: 80px;
         height: 80px;
@@ -139,7 +144,6 @@
         align-items: center;
         justify-content: center;
         font-size: 38px;
-        /* Soft shadow instead of border */
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
       }
       .avatar-img {
@@ -149,12 +153,13 @@
       .name-row {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 8px;
         margin-top: 4px;
       }
       .username {
         font-size: 18px;
-        font-weight: 900;
+        font-weight: var(--w-medium);
         color: var(--ink);
       }
 
@@ -166,6 +171,7 @@
         border: 2px solid rgba(31, 31, 31, 0.1);
         color: var(--ink);
         font-size: 11px;
+        font-weight: var(--w-medium);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -187,7 +193,7 @@
         border-radius: 10px;
         border: 2px solid rgba(31, 31, 31, 0.1);
         background: #fff;
-        font-weight: 900;
+        font-weight: var(--w-medium);
         color: var(--ink);
         font-size: 13px;
         text-align: center;
@@ -198,7 +204,7 @@
         border-radius: 10px;
         background: var(--accent);
         border: 2px solid rgba(31, 31, 31, 0.1);
-        font-weight: 900;
+        font-weight: var(--w-semibold);
         font-size: 12px;
         cursor: pointer;
         color: var(--ink);
@@ -211,6 +217,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
       }
       .bio-display-row {
         display: flex;
@@ -221,7 +228,7 @@
       }
       .bio-text {
         font-size: 12px;
-        font-weight: 800;
+        font-weight: var(--w-medium);
         color: rgba(31, 31, 31, 0.6);
         text-align: center;
         line-height: 1.3;
@@ -245,7 +252,7 @@
       }
       .stat-label {
         font-size: 9px;
-        font-weight: 900;
+        font-weight: var(--w-regular);
         color: rgba(31, 31, 31, 0.45);
         text-transform: uppercase;
         margin-bottom: 3px;
@@ -253,7 +260,7 @@
       }
       .stat-value {
         font-size: 14px;
-        font-weight: 900;
+        font-weight: var(--w-bold);
         color: var(--ink);
       }
 
@@ -268,7 +275,7 @@
 
       .section-label-row {
         font-size: 11px;
-        font-weight: 900;
+        font-weight: var(--w-semibold);
         color: rgba(31, 31, 31, 0.6);
         margin-bottom: 8px;
         text-transform: uppercase;
@@ -277,19 +284,21 @@
         align-items: center;
         justify-content: space-between;
       }
-
+      .section-label-row span {
+        font-size: 13px;
+      }
       /* STATIC + BADGE (Unclickable) */
       .icon-badge-static {
         width: 28px;
         height: 28px;
         border-radius: 10px;
-        background: var(--ink); /* Black background */
-        color: var(--accent); /* Yellow icon */
+        background: var(--ink);
+        color: var(--accent);
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 14px;
-        font-weight: 900;
+        font-weight: var(--w-bold);
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
         cursor: default; /* Not clickable */
       }
@@ -315,12 +324,12 @@
       }
       .setting-title {
         font-size: 12px;
-        font-weight: 900;
+        font-weight: var(--w-semibold);
         color: var(--ink);
       }
       .setting-sub {
-        font-size: 10px;
-        font-weight: 900;
+        font-size: 8px;
+        font-weight: var(--w-regular);
         color: rgba(31, 31, 31, 0.45);
         text-transform: uppercase;
         letter-spacing: 0.35px;
@@ -337,7 +346,7 @@
         padding: 6px 10px;
         border-radius: 999px;
         font-size: 11px;
-        font-weight: 900;
+        font-weight: var(--w-semibold);
         color: var(--ink);
         background: rgba(var(--cream-rgb), 0.45);
         border: 2px solid rgba(31, 31, 31, 0.08);
@@ -351,6 +360,7 @@
         background: var(--accent);
         color: var(--ink);
         font-size: 13px;
+        font-weight: var(--w-bold);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -368,7 +378,7 @@
         background: rgba(var(--cream-rgb), 0.35);
         color: rgba(31, 31, 31, 0.75);
         font-size: 13px;
-        font-weight: 900;
+        font-weight: var(--w-semibold);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -380,56 +390,62 @@
       /* POPUPS */
       .popup-overlay {
         position: fixed;
-        inset: 0;
-        z-index: 999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(31, 31, 31, 0.35);
         display: flex;
-        align-items: center;
         justify-content: center;
-        padding: 18px;
-      }
-      .popup-dim {
-        position: absolute;
-        inset: 0;
-        background: rgba(31, 31, 31, 0.25);
+        align-items: center;
+        z-index: 999;
       }
       .popup-box {
-        position: relative;
-        width: min(300px, 92vw);
-        background: rgba(var(--cream-rgb), 0.92);
-        backdrop-filter: blur(14px);
+        background: var(--bg);
         border-radius: 22px;
-        padding: 16px 16px 14px;
-        border: 2px solid rgba(31, 31, 31, 0.1);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+        width: 280px;
+        padding: 22px;
         text-align: center;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.22);
+        animation: scalePop 0.25s;
+        border: 2px solid rgba(31, 31, 31, 0.08);
       }
+      @keyframes scalePop {
+        from {
+          transform: scale(0.8);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+
       .popup-box h3 {
-        font-size: 14px;
-        font-weight: 900;
+        font-size: 19px;
+        font-weight: var(--w-bold);
         color: var(--ink);
-        margin-bottom: 6px;
+        margin-bottom: 8px;
       }
       .popup-box p {
         font-size: 13px;
-        font-weight: 900;
-        color: rgba(31, 31, 31, 0.7);
-        margin-bottom: 12px;
+        color: rgba(31, 31, 31, 0.75);
+        margin-bottom: 18px;
+        font-weight: var(--w-regular);
       }
+
       .popup-actions {
         display: flex;
-        justify-content: center;
         gap: 10px;
       }
       .popup-btn {
         flex: 1;
-        border: none;
+        padding: 11px;
         border-radius: 14px;
-        padding: 10px 12px;
-        font-size: 13px;
-        font-weight: 900;
+        border: none;
+        font-weight: var(--w-bold);
+        font-size: 14px;
         cursor: pointer;
-        border: 2px solid rgba(31, 31, 31, 0.1);
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+        background: var(--accent);
+        color: var(--ink);
       }
       .popup-primary {
         background: var(--accent);
@@ -446,20 +462,19 @@
         margin: 10px 0 12px;
         padding: 10px 12px;
         border-radius: 14px;
-        border: 2px solid var(--ink); /* Defined border */
-
-        /* FIX: Make background accent (yellow) so it matches the vibe */
+        border: 2px solid var(--ink);
         background: var(--accent);
         color: var(--ink);
 
-        font-size: 16px; /* slightly larger for readability */
-        font-weight: 900;
+        font-size: 16px;
+        font-weight: var(--w-medium);
         outline: none;
         font-family: "DynaPuff", sans-serif;
         text-align: center;
       }
       .popup-input::placeholder {
         color: rgba(31, 31, 31, 0.5);
+        font-weight: var(--w-medium);
       }
     </style>
   </head>
@@ -676,7 +691,7 @@
         };
       }
 
-      // ---------- 1. NAME LOGIC ----------
+      // ---------- 1. NAME  ----------
       const savedName = localStorage.getItem(NAME_KEY);
       if (savedName && savedName.trim())
         usernameDisplay.textContent = savedName;
@@ -698,7 +713,7 @@
         nameDisplayRow.style.display = "flex";
       };
 
-      // ---------- 2. BIO LOGIC (Same UI as Name) ----------
+      // ---------- 2. BIO ----------
       const savedBio = localStorage.getItem(BIO_KEY);
       if (savedBio && savedBio.trim()) bioText.textContent = savedBio;
 
@@ -719,7 +734,7 @@
         bioDisplayRow.style.display = "flex";
       };
 
-      // ---------- 3. STATS LOGIC ----------
+      // ---------- 3. STATS ----------
       const rawMins = parseInt(localStorage.getItem(TOTAL_MINUTES_KEY) || 0);
       const rawSessions = parseInt(
         localStorage.getItem(SESSION_COUNT_KEY) || 0
