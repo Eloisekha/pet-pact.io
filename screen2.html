@@ -16,12 +16,11 @@
       href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <style>
-      /* =========================
-         THEME (same as login)
-         - Whole background: #F4F3F1
-         - Accent: #F3B03B (yellow)
-         ========================= */
       :root {
         --bg: #f4f3f1; /* white-ish */
         --ink: #1f1f1f; /* black */
@@ -88,9 +87,40 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        position: relative;
+      }
+
+      /* ===== HORIZONTAL SCROLL CONTAINER ===== */
+      .scroll-container {
+        flex: 1;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        display: flex;
+        scroll-behavior: smooth;
+      }
+
+      .scroll-container::-webkit-scrollbar {
+        height: 0;
+      }
+
+      /* ===== SLIDE SECTIONS ===== */
+      .slide-section {
+        width: 100%;
+        min-width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 30px 22px;
+        scroll-snap-align: start;
+      }
+
+      /* ===== WELCOME SLIDE ===== */
+      .welcome-slide {
+        gap: 16px;
         text-align: center;
       }
 
@@ -98,12 +128,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 18px;
+        gap: 12px;
       }
 
-      /* Yellow accent badge behind icon
-         - removed border/ring
-      */
       .logo-circle {
         width: auto;
         height: auto;
@@ -112,11 +139,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: 16px;
-        border: none; /* remove ring */
+        border: none;
       }
 
-      /* Icon size FIX: it must be smaller than the circle */
       .logo-img {
         width: 100px;
         height: 100px;
@@ -124,7 +149,6 @@
         display: block;
       }
 
-      /* Same moving effect (pulse) */
       .pulse {
         animation: pulse 2.2s ease-in-out infinite;
       }
@@ -152,27 +176,105 @@
       .welcome-text {
         font-size: 13px;
         color: rgba(31, 31, 31, 0.75);
-        margin-top: 8px;
         font-weight: 900;
         text-transform: uppercase;
         letter-spacing: 1px;
       }
 
-      /* START BUTTON */
+      /* ===== CAROUSEL SLIDES  ===== */
+      .carousel-slide {
+        width: 100%;
+        min-width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+        padding: 30px 22px;
+        text-align: center;
+        scroll-snap-align: start;
+      }
+
+      .slide-icon {
+        font-size: 48px;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 70px;
+      }
+
+      .slide-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--ink);
+        letter-spacing: 0.5px;
+      }
+
+      .slide-description {
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba(31, 31, 31, 0.65);
+        line-height: 1.4;
+      }
+
+      /* ===== DOTS INDICATOR ===== */
+      .dots-row {
+        position: absolute;
+        bottom: auto;
+        top: 50%;
+        transform: translateX(-50%) translateY(120px);
+        left: 50%;
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        z-index: 10;
+      }
+
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(31, 31, 31, 0.2);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .dot.active {
+        background: var(--accent);
+        width: 20px;
+        border-radius: 3px;
+      }
+
+      /* ===== FOOTER WITH BUTTONS ===== */
+      .footer-row {
+        width: 100%;
+        padding: 0 22px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(160px);
+        left: 0;
+      }
+
       .btn-start {
-        margin-top: 36px;
-        width: 200px;
-        padding: 12px 0;
+        width: 100%;
+        padding: 10px 0;
         border: none;
-        border-radius: 14px;
+        border-radius: 12px;
         background-color: var(--ink);
         color: var(--accent);
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 900;
-        letter-spacing: 2px;
+        letter-spacing: 1.5px;
         cursor: pointer;
         box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.1s;
+        transition: transform 0.15s;
+        text-transform: uppercase;
       }
 
       .btn-start:active {
@@ -184,6 +286,23 @@
         box-shadow: 0 0 0 4px rgba(243, 176, 59, 0.22),
           0 6px 10px rgba(0, 0, 0, 0.1);
       }
+
+      .btn-start.hidden {
+        display: none;
+      }
+
+      .skip-text {
+        font-size: 10px;
+        color: rgba(31, 31, 31, 0.55);
+        text-decoration: none;
+        font-weight: 600;
+        letter-spacing: 0.4px;
+        transition: color 0.2s;
+      }
+
+      .skip-text:hover {
+        color: var(--ink);
+      }
     </style>
   </head>
 
@@ -192,25 +311,117 @@
       <div class="phone-notch"></div>
 
       <div class="app-screen">
-        <div class="logo-section">
-          <div class="logo-circle pulse">
-            <img class="logo-img" src="icon.png" alt="PetPact icon" />
+        <!-- HORIZONTAL SCROLL CONTAINER -->
+        <div class="scroll-container" id="scrollContainer">
+          <!-- SLIDE 0: WELCOME -->
+          <div class="slide-section welcome-slide">
+            <div class="logo-section">
+              <div class="logo-circle pulse">
+                <img class="logo-img" src="icon.png" alt="PetPact icon" />
+              </div>
+              <h1 class="app-title">pet pact</h1>
+            </div>
+            <p class="welcome-text">Welcome to the pact!</p>
           </div>
 
-          <h1 class="app-title">pet pact</h1>
-          <p class="welcome-text">Welcome to the pact!</p>
+          <!-- SLIDE 1: FOCUS SESSIONS -->
+          <div class="carousel-slide">
+            <div class="slide-icon"><i class="fa-solid fa-clock"></i></div>
+            <div class="slide-title">Focus Sessions</div>
+            <div class="slide-description">
+              Set custom study time and track your focus sessions with your pet
+              buddy 🐾
+            </div>
+          </div>
+
+          <!-- SLIDE 2: GROW YOUR PET -->
+          <div class="carousel-slide">
+            <div class="slide-icon"><i class="fa-solid fa-paw"></i></div>
+            <div class="slide-title">Grow Your Pet</div>
+            <div class="slide-description">
+              Unlock new pets and accessories as you build your streak and stay
+              consistent!
+            </div>
+          </div>
+
+          <!-- SLIDE 3: PLAN AHEAD -->
+          <div class="carousel-slide">
+            <div class="slide-icon"><i class="fa-solid fa-calendar"></i></div>
+            <div class="slide-title">Plan Ahead</div>
+            <div class="slide-description">
+              Schedule your study tasks in the calendar and organize your focus
+              goals!
+            </div>
+          </div>
+
+          <!-- SLIDE 4: TEAM UP -->
+          <div class="carousel-slide">
+            <div class="slide-icon">
+              <i class="fa-solid fa-people-group"></i>
+            </div>
+            <div class="slide-title">Team Up</div>
+            <div class="slide-description">
+              Invite friends to study together and keep each other accountable
+              on your journey!
+            </div>
+          </div>
         </div>
 
-        <button id="startBtn" class="btn-start">START</button>
+        <!-- DOTS INDICATOR -->
+        <div class="dots-row" id="dotsRow"></div>
+
+        <!-- FOOTER -->
+        <div class="footer-row" id="footerRow">
+          <button id="startBtn" class="btn-start hidden">GET STARTED</button>
+          <a href="main.html" class="skip-text">Skip for now →</a>
+        </div>
       </div>
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("startBtn").addEventListener("click", () => {
-          window.location.href = "main.html";
+      const scrollContainer = document.getElementById("scrollContainer");
+      const dotsRow = document.getElementById("dotsRow");
+      const startBtn = document.getElementById("startBtn");
+
+      const totalSlides = 5;
+
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement("div");
+        dot.className = "dot" + (i === 0 ? " active" : "");
+        dot.onclick = () => scrollToSlide(i);
+        dotsRow.appendChild(dot);
+      }
+
+      const dots = document.querySelectorAll(".dot");
+
+      function scrollToSlide(index) {
+        const slideWidth = scrollContainer.offsetWidth;
+        scrollContainer.scrollLeft = slideWidth * index;
+      }
+
+      function updateDotsAndFooter() {
+        const slideWidth = scrollContainer.offsetWidth;
+        const scrollLeft = scrollContainer.scrollLeft;
+        const currentSlideIndex = Math.round(scrollLeft / slideWidth);
+
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("active", index === currentSlideIndex);
         });
+
+        if (currentSlideIndex === totalSlides - 1) {
+          startBtn.classList.remove("hidden");
+        } else {
+          startBtn.classList.add("hidden");
+        }
+      }
+
+      scrollContainer.addEventListener("scroll", updateDotsAndFooter);
+
+      startBtn.addEventListener("click", () => {
+        window.location.href = "main.html";
       });
+
+      updateDotsAndFooter();
     </script>
   </body>
 </html>
